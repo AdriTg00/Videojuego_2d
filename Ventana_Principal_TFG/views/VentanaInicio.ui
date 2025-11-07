@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>launcher</class>
+ <widget class="QMainWindow" name="launcher">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>489</width>
+    <height>607</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Launcher</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #faf0d6;
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>40</y>
+      <width>251</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../resources/resources.qrc">:/imagenes/images/el_rey_y_los_cerdos.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>-50</x>
+      <y>300</y>
+      <width>211</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../resources/resources.qrc">:/imagenes/images/rey.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nuevaPartida">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>260</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Press Start 2P</family>
+      <pointsize>8</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #ffd84a;         /* color dorado */
+    border: 3px solid #6a4e00;         /* borde oscuro */
+    border-radius: 10px;               /* bordes redondeados */
+    color: #2e2e2e;                    /* texto oscuro */
+    padding: 8px 16px;
+}
+
+QPushButton:hover {
+    background-color: #ffe680;         /* más claro al pasar el ratón */
+}
+
+QPushButton:pressed {
+    background-color: #e5c13a;         /* tono más oscuro al pulsar */
+    border: 3px solid #4d3700;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Nueva partida</string>
+    </property>
+    <property name="icon">
+     <iconset theme="applications-games"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cargarDatos">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>330</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Press Start 2P</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#cargarDatos {
+    background-color: #6CDE56;           /* verde base */
+    border: 3px solid #296B20;           /* borde verde oscuro */
+    border-radius: 10px;
+    color: #1E1E1E;                      /* texto casi negro */
+   
+    padding: 8px 16px;
+}
+
+#cargarDatos:hover {
+    background-color: #7FF066;           /* más claro al pasar el ratón */
+}
+
+#cargarDatos:pressed {
+    background-color: #58B947;           /* tono más oscuro al pulsar */
+    border: 3px solid #204D1A;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Cargar datos</string>
+    </property>
+    <property name="icon">
+     <iconset theme="accessories-dictionary"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="opciones">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>400</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Press Start 2P</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#opciones {
+    background-color: #9CC3D5;           /* azul grisáceo base */
+    border: 3px solid #2E3F4E;           /* borde más oscuro */
+    border-radius: 10px;
+    color: #1A1A1A;
+
+}
+
+#opciones:hover {
+    background-color: #B5D3E1;           /* tono más claro al pasar el ratón */
+}
+
+#opciones:pressed {
+    background-color: #7CA6BB;           /* tono más oscuro al pulsar */
+    border: 3px solid #1E2B35;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Opciones</string>
+    </property>
+    <property name="icon">
+     <iconset theme="applications-development"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="salir">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>470</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Press Start 2P</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#salir {
+    background-color: #E06C75;
+    border: 3px solid #7A1C1C;
+    border-radius: 10px;
+    color: white;
+}
+#salir:hover {
+    background-color: #EE828A;
+}
+#salir:pressed {
+    background-color: #C1555D;
+    border: 3px solid #5A0F0F;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Salir</string>
+    </property>
+    <property name="icon">
+     <iconset theme="application-exit"/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>330</y>
+      <width>181</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../resources/resources.qrc">:/imagenes/images/cerdito.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="idioma">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>530</y>
+      <width>163</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #3C3C3C;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px;
+    letter-spacing: 1px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Idioma:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboIdioma">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>540</y>
+      <width>151</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* === ComboBox fino y elegante === */
+QComboBox {
+    font-family: &quot;Arial&quot;;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 20px 2px 8px;   /* menos aire */
+    min-height: 22px;            /* 🔥 forzado */
+    max-height: 24px;            /* 🔥 forzado */
+    line-height: 16px;           /* 🔥 truco visual */
+    border-radius: 6px;
+    background: qlineargradient(
+        x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 rgba(247, 229, 150, 255),
+        stop: 1 rgba(235, 200, 80, 255)
+    );
+    color: #2b2b2b;
+    border: 2px solid rgba(150, 110, 30, 0.6);
+}
+
+/* --- Flecha --- */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 18px;
+    border: none;
+    background: transparent;
+}
+
+QComboBox::down-arrow {
+    width: 0;
+    height: 0;
+    margin-right: 6px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(70, 40, 10, 0.9);
+}
+
+/* --- Lista desplegable --- */
+QComboBox QAbstractItemView {
+    outline: 0;
+    background: #fff9e6;
+    color: #2b2b2b;
+    border: 1px solid rgba(150, 110, 30, 0.6);
+    padding: 2px;
+    border-radius: 4px;
+    selection-background-color: rgba(245, 234, 180, 255);
+    selection-color: black;
+}
+
+/* --- Items individuales --- */
+QComboBox::item {
+    color: #2b2b2b;
+    padding: 2px 6px;
+}
+
+QComboBox::item:selected {
+    background: rgba(245, 234, 180, 255);
+    color: black;
+}
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Español</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>English</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Français</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Deutsch</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>partidaGuardada</class>
+ <widget class="QWidget" name="partidaGuardada">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>430</width>
+    <height>415</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Partidas guardadas</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #faf0d6;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="4" column="1">
+    <widget class="QPushButton" name="partidaGuardada3">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QPushButton" name="partidaGuardada7">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="partidaGuardada5">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2">
+    <widget class="QPushButton" name="x8">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="x4">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1" rowspan="2">
+    <widget class="QLabel" name="partidasGuardadas">
+     <property name="maximumSize">
+      <size>
+       <width>500</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    color: #3C3C3C;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 6px;
+    letter-spacing: 1px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Partidas guardadas:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QPushButton" name="x3">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="x2">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="x1">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QPushButton" name="x6">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="partidaGuardada1">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="partidaGuardada4">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="partidaGuardada6">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QPushButton" name="partidaGuardada8">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QPushButton" name="x5">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="partidaGuardada2">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #76C76B;        /* Verde brillante */
+    border: 3px solid #4A8F3A;        /* Verde oscuro (borde) */
+    border-radius: 10px;
+    color: #1E2E0F;                   /* Verde-marrón oscuro (texto) */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #8FE37F;        /* Verde más vivo al pasar el ratón */
+    border: 3px solid #5DAE48;
+}
+
+QPushButton:pressed {
+    background-color: #5EA85B;        /* Verde más oscuro al presionar */
+    border: 3px solid #3B6B2C;
+}
+
+QPushButton:disabled {
+    background-color: #B2B2B2;        /* Gris apagado */
+    color: #666666;
+    border: 3px solid #8C8C8C;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;Vacio&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <widget class="QPushButton" name="x7">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #E76E55;         /* Rojo cálido */
+    border: 3px solid #B8463D;         /* Contorno más oscuro */
+    border-radius: 8px;
+    color: #FFF8DC;                    /* Blanco con tono cálido */
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+QPushButton:hover {
+    background-color: #FF8770;         /* Más claro al pasar el ratón */
+    border: 3px solid #E45C4A;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #C95442;         /* Más oscuro al presionar */
+    border: 3px solid #9E3E35;
+    transform: scale(0.95);
+}
+
+QPushButton:disabled {
+    background-color: #BFBFBF;         /* Gris apagado */
+    border: 2px solid #8C8C8C;
+    color: #E0E0E0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
