@@ -1,6 +1,6 @@
-[gd_scene load_steps=66 format=3 uid="uid://b0vjtjiqkhxpo"]
+[gd_scene load_steps=68 format=3 uid="uid://b0vjtjiqkhxpo"]
 
-[ext_resource type="PackedScene" uid="uid://bojdsefgg5ctc" path="res://Escenas/Escenario1.tscn" id="1_6nong"]
+[ext_resource type="PackedScene" uid="uid://bojdsefgg5ctc" path="res://Escenas/escenario1.tscn" id="1_6nong"]
 [ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/puerta.tscn" id="2_h3qja"]
 [ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/rey.tscn" id="3_metos"]
 [ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer.gd" id="4_h146j"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/moneda.tscn" id="8_1viw4"]
 [ext_resource type="PackedScene" uid="uid://dm2ovaj0lxot8" path="res://Escenas/enemigo.tscn" id="9_sosnl"]
 [ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/pausa.tscn" id="10_h3qja"]
+[ext_resource type="PackedScene" uid="uid://dmr6vau08m63l" path="res://Escenas/puerta_salida.tscn" id="11_h146j"]
+[ext_resource type="Script" uid="uid://dbpc6japmx87s" path="res://Scripts/puerta_salida.gd" id="12_gjw6x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ln3"]
 atlas = ExtResource("5_gjw6x")
@@ -553,3 +555,7 @@ position = Vector2(1070, -391)
 position = Vector2(1757, -253)
 
 [node name="Pausa" parent="." instance=ExtResource("10_h3qja")]
+
+[node name="puerta_salida" parent="." instance=ExtResource("11_h146j")]
+position = Vector2(2029, -326)
+script = ExtResource("12_gjw6x")
