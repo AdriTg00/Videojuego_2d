@@ -1,17 +1,17 @@
 [gd_scene load_steps=68 format=3 uid="uid://b0vjtjiqkhxpo"]
 
-[ext_resource type="PackedScene" uid="uid://bojdsefgg5ctc" path="res://Escenas/escenario1.tscn" id="1_6nong"]
-[ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/puerta.tscn" id="2_h3qja"]
-[ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/rey.tscn" id="3_metos"]
+[ext_resource type="PackedScene" uid="uid://bojdsefgg5ctc" path="res://Escenas/escenas_sueltas/escenario1.tscn" id="1_6nong"]
+[ext_resource type="Script" uid="uid://d4caokhdyxue3" path="res://Scripts/primer_nivel.gd" id="1_11vps"]
+[ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/escenas_sueltas/puerta.tscn" id="2_h3qja"]
+[ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="3_metos"]
 [ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer.gd" id="4_h146j"]
 [ext_resource type="Texture2D" uid="uid://de82kdu623pnf" path="res://Escenarios/Big Diamond Hit (18x14).png" id="5_gjw6x"]
 [ext_resource type="Texture2D" uid="uid://d1b1b2vush8r3" path="res://Escenarios/Big Heart Idle (18x14).png" id="6_nl4fh"]
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="7_v3ylf"]
-[ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/moneda.tscn" id="8_1viw4"]
-[ext_resource type="PackedScene" uid="uid://dm2ovaj0lxot8" path="res://Escenas/enemigo.tscn" id="9_sosnl"]
-[ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/pausa.tscn" id="10_h3qja"]
-[ext_resource type="PackedScene" uid="uid://dmr6vau08m63l" path="res://Escenas/puerta_salida.tscn" id="11_h146j"]
-[ext_resource type="Script" uid="uid://dbpc6japmx87s" path="res://Scripts/puerta_salida.gd" id="12_gjw6x"]
+[ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/escenas_sueltas/moneda.tscn" id="8_1viw4"]
+[ext_resource type="PackedScene" uid="uid://dm2ovaj0lxot8" path="res://Escenas/escenas_sueltas/enemigo.tscn" id="9_sosnl"]
+[ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/escenas_sueltas/pausa.tscn" id="10_h3qja"]
+[ext_resource type="PackedScene" uid="uid://bn8useixraffm" path="res://Escenas/escenas_sueltas/puerta_salida.tscn" id="11_h146j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ln3"]
 atlas = ExtResource("5_gjw6x")
@@ -429,6 +429,7 @@ animations = [{
 }]
 
 [node name="Juego" type="Node2D"]
+script = ExtResource("1_11vps")
 
 [node name="Escenario" parent="." instance=ExtResource("1_6nong")]
 position = Vector2(2, -28)
@@ -437,8 +438,11 @@ scale = Vector2(1, 0.9934582)
 [node name="Puerta" parent="." instance=ExtResource("2_h3qja")]
 position = Vector2(-166, -55)
 
+[node name="puerta_salida" parent="." instance=ExtResource("11_h146j")]
+position = Vector2(2012, -326)
+
 [node name="Rey" parent="." instance=ExtResource("3_metos")]
-position = Vector2(-158, -42)
+position = Vector2(1928, -322)
 
 [node name="Camera2D" type="Camera2D" parent="Rey"]
 position = Vector2(0, -26.065)
@@ -502,6 +506,15 @@ theme_override_font_sizes/font_size = 50
 text = "Time: 00:00
 "
 
+[node name="level_section" type="Label" parent="CanvasLayer"]
+offset_left = 28.0
+offset_top = 141.0
+offset_right = 172.0
+offset_bottom = 177.0
+theme_override_fonts/font = ExtResource("7_v3ylf")
+theme_override_font_sizes/font_size = 40
+text = "LEVEL 1"
+
 [node name="monedas" type="Node" parent="."]
 
 [node name="moneda" parent="monedas" instance=ExtResource("8_1viw4")]
@@ -555,7 +568,3 @@ position = Vector2(1070, -391)
 position = Vector2(1757, -253)
 
 [node name="Pausa" parent="." instance=ExtResource("10_h3qja")]
-
-[node name="puerta_salida" parent="." instance=ExtResource("11_h146j")]
-position = Vector2(2029, -326)
-script = ExtResource("12_gjw6x")

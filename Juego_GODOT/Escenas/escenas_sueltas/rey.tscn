@@ -406,7 +406,7 @@ script = ExtResource("1_kwr62")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_arak2")
-animation = &"dead"
+animation = &"door_in"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.185)

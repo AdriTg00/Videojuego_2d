@@ -29,6 +29,8 @@ const COOLDOWN_ATAQUE = 0.2
 var vida = 5
 var invulnerable = false
 var monedas = 0
+var bloqueado = false
+
 
 var recibiendo_daño := false;
 
@@ -48,6 +50,8 @@ var direccion_movimiento = 0
 
 
 func _physics_process(delta):
+	if bloqueado:
+		return
 	if muerto:
 		return
 	if en_secuencia_puerta:
