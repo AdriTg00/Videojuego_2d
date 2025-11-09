@@ -271,11 +271,6 @@ script = ExtResource("1_i3ivu")
 sprite_frames = SubResource("SpriteFrames_glxln")
 animation = &"idle"
 
-[node name="detector_salto" type="RayCast2D" parent="."]
-position = Vector2(0, 11.645)
-rotation = 1.5707964
-exclude_parent = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 4.5)
 shape = SubResource("RectangleShape2D_46cx0")

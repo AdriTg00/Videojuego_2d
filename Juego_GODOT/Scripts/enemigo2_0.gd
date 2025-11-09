@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 # --- Parámetros exportados ---
 @export var margen_colision: float = 20.0
-@export var velocidad: float = 50.0
+@export var velocidad: float = 90.0
 @export var gravedad: float = 1200.0
 @export var max_caida: float = 1000.0
 @export var rango_persecucion: float = 250.0
