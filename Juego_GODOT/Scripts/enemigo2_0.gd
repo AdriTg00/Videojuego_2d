@@ -116,10 +116,9 @@ func _iniciar_patruya():
 	_patrol_loop()
 
 func recibir_dano(cantidad: int = 1):
-	recibiendo_daño = true
-
 	if muerto or invulnerable:
 		return
+	recibiendo_daño = true
 	vida -= cantidad
 	print("El cerdo recibió daño. Vida restante:", vida)
 	
