@@ -117,7 +117,11 @@ scale = Vector2(0.6129376, 0.62832963)
 shape = SubResource("CircleShape2D_0lukg")
 
 [node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(2.394971, 2.394971)
 shape = SubResource("CircleShape2D_iwfbh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

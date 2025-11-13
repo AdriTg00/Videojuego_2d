@@ -23,7 +23,7 @@ class Ui_launcher(object):
     def setupUi(self, launcher):
         if not launcher.objectName():
             launcher.setObjectName(u"launcher")
-        launcher.resize(489, 607)
+        launcher.resize(489, 613)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,7 +35,7 @@ class Ui_launcher(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.label_2 = QLabel(self.centralwidget)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(120, 40, 251, 121))
+        self.label_2.setGeometry(QRect(120, 50, 251, 121))
         self.label_2.setPixmap(QPixmap(u":/imagenes/images/el_rey_y_los_cerdos.png"))
         self.label_2.setScaledContents(True)
         self.label_3 = QLabel(self.centralwidget)

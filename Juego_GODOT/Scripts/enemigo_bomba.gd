@@ -22,20 +22,28 @@ func _ready():
 func _physics_process(delta):
 	if recibiendo_daño:
 		return
+	if jugador_detectado and jugador:
+		if jugador.global_position.x > global_position.x:
+			anim.flip_h = true
+		else:
+			anim.flip_h = false    
 	_aplicar_gravedad(delta)
 	move_and_slide()
 
 # --- Detectar jugador ---
 func _on_body_entered(body):
 	if body.name == "Rey":  
+		print('entro')
 		jugador = body
 		jugador_detectado = true
 		_iniciar_lanzamiento()  # 
 
 func _on_body_exited(body):
 	if body.name == "Rey":
+		print('salió')
 		jugador = null
 		jugador_detectado = false
+		lanzando = false
 		timer.stop()
 		anim.play("idle")
 
@@ -99,12 +107,14 @@ func _iniciar_lanzamiento():
 		anim.play("throwing")
 		await anim.animation_finished
 		anim.play("idle")
-
 		var bomba = bomba_scene.instantiate()
 		get_tree().current_scene.add_child(bomba)
-		bomba.global_position = global_position + Vector2(-15, -5)
-		bomba.apply_impulse(Vector2(-170, -150))
-		
-
+		if jugador.global_position.x > global_position.x:
+			bomba.global_position = global_position + Vector2(15, -15)
+			bomba.apply_impulse(Vector2(150, -170))
+		else:
+			bomba.global_position = global_position + Vector2(-15, -5)
+			bomba.apply_impulse(Vector2(-170, -150))
+			
 		lanzando = false
 		timer.start(1.0)  
