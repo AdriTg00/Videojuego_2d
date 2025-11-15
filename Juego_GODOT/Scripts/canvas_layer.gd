@@ -6,7 +6,7 @@ extends CanvasLayer
 @export var hud_offset := Vector2(-500, -250)  # Desplazamiento del HUD en pantalla
 @export var suavizado := true
 @export var velocidad_suavizado := 5.0
-
+@onready var death_label = $death
 # --- SISTEMA DE VIDA ---
 @export var max_vida := 5
 var vida_actual := max_vida
@@ -22,6 +22,8 @@ func _ready():
 	
 	#Empieza el tiempo
 	start_timer()
+	death_label.text = "DEATHS: " + str(Global.death_count)
+
 	#Se empieza con 0 puntos
 	score_label.text = "Score: " + str(score)  # Muestra "0" al inicio
 	# 🔹 Inicializa corazones
@@ -94,6 +96,11 @@ func actualizar_vida(nueva_vida: int):
 				corazones[i].play("idle")
 
 	vida_actual = clamp(nueva_vida, 0, max_vida)
+	
+	
+func actualizar_muertes():
+	Global.death_count += 1
+	death_label.text = "DEATHS: " + str(Global.death_count)
 
 
 func _romper_corazon(corazon: AnimatedSprite2D):

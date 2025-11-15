@@ -187,6 +187,9 @@ func _morir():
 	print("El rey ha muerto")
 	var pantalla_muerte = get_tree().root.get_node("Juego/canvas_layer_dead")  # cambia por tu ruta real
 	pantalla_muerte.mostrar_pantalla_muerte()
+	var hud = get_tree().root.get_node("Juego/CanvasLayer")
+	hud.actualizar_muertes()
+
 # --- ATAQUE ---
 
 func _atacar():

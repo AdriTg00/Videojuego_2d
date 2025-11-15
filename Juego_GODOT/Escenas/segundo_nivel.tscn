@@ -497,6 +497,14 @@ theme_override_fonts/font = ExtResource("4_6dj0q")
 theme_override_font_sizes/font_size = 40
 text = "LEVEL 2"
 
+[node name="death" type="Label" parent="CanvasLayer"]
+offset_left = 737.0
+offset_top = 74.0
+offset_right = 809.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("4_6dj0q")
+theme_override_font_sizes/font_size = 60
+
 [node name="StaticBody2D" parent="." instance=ExtResource("5_6dj0q")]
 position = Vector2(127, -19)
 
@@ -573,10 +581,25 @@ position = Vector2(1607, 404)
 position = Vector2(1915, 343)
 
 [node name="moneda20" parent="monedas" instance=ExtResource("9_0scks")]
-position = Vector2(2001, 343)
+position = Vector2(1955, 343)
 
 [node name="moneda21" parent="monedas" instance=ExtResource("9_0scks")]
-position = Vector2(1817, 343)
+position = Vector2(1873, 343)
+
+[node name="moneda22" parent="monedas" instance=ExtResource("9_0scks")]
+position = Vector2(1522, 282)
+
+[node name="moneda23" parent="monedas" instance=ExtResource("9_0scks")]
+position = Vector2(1482, 282)
+
+[node name="moneda24" parent="monedas" instance=ExtResource("9_0scks")]
+position = Vector2(1443, 282)
+
+[node name="moneda25" parent="monedas" instance=ExtResource("9_0scks")]
+position = Vector2(1400, 282)
+
+[node name="moneda26" parent="monedas" instance=ExtResource("9_0scks")]
+position = Vector2(1993, 343)
 
 [node name="enemigos2_0" type="Node" parent="."]
 
@@ -593,6 +616,16 @@ velocidad = 90.0
 [node name="enemigo_bomba" parent="enemigos2_0" instance=ExtResource("12_hcc8u")]
 position = Vector2(878, 654)
 
-[node name="canvas_layer_dead" parent="." instance=ExtResource("13_g6j3w")]
+[node name="enemigo_bomba2" parent="enemigos2_0" instance=ExtResource("12_hcc8u")]
+position = Vector2(1679, 408)
 
-[node name="canvas_layer_dead2" parent="." instance=ExtResource("13_g6j3w")]
+[node name="enemigo_bomba3" parent="enemigos2_0" instance=ExtResource("12_hcc8u")]
+position = Vector2(2030, 342)
+
+[node name="enemigo_bomba4" parent="enemigos2_0" instance=ExtResource("12_hcc8u")]
+position = Vector2(1370, 280)
+
+[node name="enemigo_bomba5" parent="enemigos2_0" instance=ExtResource("12_hcc8u")]
+position = Vector2(2120, 218)
+
+[node name="canvas_layer_dead" parent="." instance=ExtResource("13_g6j3w")]

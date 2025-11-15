@@ -70,13 +70,8 @@ func recibir_dano(cantidad: int = 1):
 		return
 
 	# --- Animación y retroceso ---
-	anim.play("hit")
-	
-	var dir_retroceso = sign(global_position.x - jugador.global_position.x)
-	velocity.x = dir_retroceso * 50         
+	anim.play("hit")       
 	# --- Aplica la física normal una sola vez ---
-	move_and_slide()
-	velocity.x = 0
 	await anim.animation_finished
 	recibiendo_daño = false
 	
