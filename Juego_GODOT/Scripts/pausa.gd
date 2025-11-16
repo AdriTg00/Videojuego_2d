@@ -33,7 +33,7 @@ func _on_guardar_pressed():
 	var http := HTTPRequest.new()
 	add_child(http)
 
-	var url = "http://127.0.0.1:5000/guardar_partida"
+	var url = "https://flask-server-9ymz.onrender.com/guardar_partida"
 
 	# Aquí pon las variables reales de tu juego:
 	var data = {
