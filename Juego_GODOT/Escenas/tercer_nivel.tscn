@@ -1,6 +1,6 @@
 [gd_scene load_steps=62 format=3 uid="uid://dw4dstf7y1gw6"]
 
-[ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer.gd" id="1_ovfxq"]
+[ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer_nivel1.gd" id="1_ovfxq"]
 [ext_resource type="Texture2D" uid="uid://de82kdu623pnf" path="res://Escenarios/Big Diamond Hit (18x14).png" id="2_bw7q8"]
 [ext_resource type="Texture2D" uid="uid://d1b1b2vush8r3" path="res://Escenarios/Big Heart Idle (18x14).png" id="3_wbfkd"]
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="4_ttry4"]

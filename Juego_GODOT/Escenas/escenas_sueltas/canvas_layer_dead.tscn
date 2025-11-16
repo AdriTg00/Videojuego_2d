@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://de8ylx7cosmsd"]
 
-[ext_resource type="Script" uid="uid://c2bw5vts5nmfv" path="res://canvas_layer_dead.gd" id="1_3kym3"]
+[ext_resource type="Script" uid="uid://c2bw5vts5nmfv" path="res://Scripts/canvas_layer_dead.gd" id="1_3kym3"]
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="2_svwbu"]
 
 [node name="CanvasLayer" type="CanvasLayer"]

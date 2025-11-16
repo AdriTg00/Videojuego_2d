@@ -62,3 +62,5 @@ theme_override_fonts/font = ExtResource("2_iki10")
 theme_override_font_sizes/font_size = 40
 text = "Salir
 "
+
+[connection signal="pressed" from="VBoxContainer/guardar" to="." method="_on_guardar_pressed"]

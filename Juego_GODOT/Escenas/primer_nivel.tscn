@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d4caokhdyxue3" path="res://Scripts/primer_nivel.gd" id="1_11vps"]
 [ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/escenas_sueltas/puerta.tscn" id="2_h3qja"]
 [ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="3_metos"]
-[ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer.gd" id="4_h146j"]
+[ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer_nivel1.gd" id="4_h146j"]
 [ext_resource type="Texture2D" uid="uid://de82kdu623pnf" path="res://Escenarios/Big Diamond Hit (18x14).png" id="5_gjw6x"]
 [ext_resource type="Texture2D" uid="uid://d1b1b2vush8r3" path="res://Escenarios/Big Heart Idle (18x14).png" id="6_nl4fh"]
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="7_v3ylf"]

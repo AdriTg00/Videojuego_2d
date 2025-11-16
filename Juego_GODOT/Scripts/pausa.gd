@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var vbox := $VBoxContainer
 @onready var btn_reanudar := $VBoxContainer/reanudar
 @onready var btn_salir := $VBoxContainer/salir
+@onready var btn_guardar := $VBoxContainer/guardar
 
 func _ready():
 	# Ocultamos el menú al inicio
@@ -27,6 +28,33 @@ func _toggle_pause():
 
 	if is_paused:
 		btn_reanudar.grab_focus()  # opcional: enfocar botón al pausar
+
+func _on_guardar_pressed():
+	var http := HTTPRequest.new()
+	add_child(http)
+
+	var url = "http://127.0.0.1:5000/guardar_partida"
+
+	# Aquí pon las variables reales de tu juego:
+	var data = {
+		"jugador_id": "PruebaLocal",  # Luego cambiarás esto por el ID real del launcher
+		"nivel": Global.nivel,
+		"tiempo": Global.get_tiempo_total(),
+		"puntuacion": Global.get_puntuacion_total(),
+		"muertes_nivel": Global.death_count,
+		"tipo": "guardado"
+	}
+
+	var json_data = JSON.stringify(data)
+
+	# Muy importante: indicar que el cuerpo es JSON
+	var headers = ["Content-Type: application/json"]
+
+	http.request(url, headers, HTTPClient.METHOD_POST, json_data)
+
+	print("Guardado enviado al servidor Flask…")
+
+
 
 func _on_reanudar_pressed():
 	get_tree().paused = false
