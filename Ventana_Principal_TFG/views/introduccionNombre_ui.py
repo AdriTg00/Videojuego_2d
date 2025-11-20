@@ -180,6 +180,7 @@ class Ui_introduccionNombre(object):
 "    border-color: #AAA;\n"
 "}\n"
 "")
+        self.lineEdit.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.gridLayout.addWidget(self.lineEdit, 2, 2, 1, 1)
 

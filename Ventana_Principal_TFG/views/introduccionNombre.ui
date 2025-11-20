@@ -229,6 +229,9 @@ QLineEdit:disabled {
 }
 </string>
      </property>
+     <property name="echoMode">
+      <enum>QLineEdit::EchoMode::Password</enum>
+     </property>
     </widget>
    </item>
   </layout>

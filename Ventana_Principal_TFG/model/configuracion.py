@@ -10,6 +10,7 @@ class Configuracion:
         self.volumen_sfx = volumen_sfx
         self.resolucion = resolucion
         self.modo_pantalla = modo_pantalla
+        
 
     def __repr__(self):
         return (

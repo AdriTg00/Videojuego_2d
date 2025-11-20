@@ -1,8 +1,6 @@
 import sys
-from PySide6.QtCore import QTranslator, QCoreApplication
 from PySide6.QtWidgets import QApplication
 from controller.app_controller import AppController
-from resources import resources_rc
 from services.configuracionService import ConfiguracionDAO
 
 def main():
@@ -20,8 +18,7 @@ def main():
         }
     """)
     controller = AppController()
-    controller.introducir_nombre.setFixedSize(controller.launcher.size())
-    controller.launcher.show()
+    controller.introducir_nombre.show()
     sys.exit(app.exec())
 
 if __name__ == "__main__":
