@@ -21,12 +21,16 @@ class AppController:
         self.launcher.idioma_cambiado.connect(self.config_window.apply_language)
         self.launcher.idioma_cambiado.connect(self.carg_partidas.apply_language)
         self.launcher.idioma_cambiado.connect(self.introducir_nombre.apply_language)
+        self.introducir_nombre.nombre_validado.connect(self.mostrar_launcher)
     
 
-    def mostrar_launcher(self):
-        pass
-         
-       
+    def mostrar_launcher(self, user_id):
+        print("Usuario validado:", user_id)
+        self.user_id = user_id   # Guardar ID en memoria
+
+        self.introducir_nombre.hide()
+        self.launcher.show()
+        
     def mostrar_partidas_guardadas(self):
         print("Abriendo ventana de configuración desde el controlador")
         self.carg_partidas.setWindowModality(Qt.ApplicationModal) 

@@ -1,11 +1,14 @@
 from DAO.jugadorDAO import JugadorDAO
+import json
+import os
 
 
 class JugadorService:
     LOCAL_FILE = "usuario_local.json"
 
-    def __init__(self):
+    def __init__(self, dao):
         self.dao = JugadorDAO()
+        self.dao = dao
 
     def validar_y_crear(self, nombre: str) -> bool:
         """
@@ -18,10 +21,7 @@ class JugadorService:
         # Crear jugador en Firebase
         self.dao.crear(nombre)
         return True
-       
-
-    def __init__(self, dao):
-        self.dao = dao
+        
 
     def existe_local(self):
         return os.path.exists(self.LOCAL_FILE)
