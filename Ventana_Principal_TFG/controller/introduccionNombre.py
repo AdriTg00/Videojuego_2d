@@ -5,17 +5,20 @@ from translator import TRANSLATIONS
 from services.jugadorService import JugadorService
 from DAO.jugadorDAO import JugadorDAO
 
-
 class introducirNombre(QWidget):
     nombre_validado = Signal(str)
 
     def __init__(self, app_state, parent=None):
         super().__init__(parent)
-        self.ui = Ui_introduccionNombre()
+
         self.app_state = app_state
+        self.ui = Ui_introduccionNombre()
+        self.ui.setupUi(self)
+
+        # Creamos DAO y Service (por ahora lo dejamos así)
         self.dao = JugadorDAO()
         self.service = JugadorService(self.dao)
-        self.ui.setupUi(self)
+
         self.apply_language()
         self.ui.iniciarPartida.clicked.connect(self.validar_nombre)
 
@@ -38,5 +41,5 @@ class introducirNombre(QWidget):
         datos = self.service.crear_usuario(nombre)
         user_id = datos["id"]
 
-        # Emitimos el ID (NO el nombre)
+        # Emitimos SOLO el ID
         self.nombre_validado.emit(user_id)

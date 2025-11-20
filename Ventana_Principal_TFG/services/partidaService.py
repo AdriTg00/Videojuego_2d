@@ -15,4 +15,4 @@ class PartidasService:
         return self.dao.obtener_partidas(nombre_jugador)
 
     def eliminar_partida(self, nombre_jugador: str, id_partida: str):
-        self.dao.eliminar_partida(nombre_jugador, id_partida)
+        self.dao.borrar_partida(nombre_jugador, id_partida)

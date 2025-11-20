@@ -5,13 +5,7 @@ BASE_URL = "https://flask-server-9ymz.onrender.com"
 class JugadorDAO:
        
     def crear_usuario(self, nombre: str):
-        """
-        Crea un usuario en el backend y devuelve:
-        {
-            "id": "...",
-            "nombre": "..."
-        }
-        """
+    
         resp = requests.post(
             f"{BASE_URL}/jugadores/crear",
             json={"nombre": nombre}
