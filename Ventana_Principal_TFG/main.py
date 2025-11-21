@@ -6,6 +6,7 @@ from services.configuracionService import ConfiguracionDAO
 def main():
     configuracion = ConfiguracionDAO()
     configuracion._connect()
+    print('HOLA')
     configuracion._ensure_table()
     app = QApplication(sys.argv)
     app.setApplicationName("Launcher")
