@@ -16,6 +16,7 @@ class AppController:
         self.config_window = configuracion(self.app_state)
         self.carg_partidas = cargar(self.app_state)
         self.introducir_nombre = introducirNombre(self.app_state)
+        self.comprobar_usuario_local()
         self.introducir_nombre.nombre_validado.connect(self.mostrar_launcher)
         self.launcher.abrir_config_signal.connect(self.mostrar_configuracion)
         self.launcher.abrir_cargar_signal.connect(self.mostrar_partidas_guardadas)
@@ -23,7 +24,7 @@ class AppController:
         self.launcher.idioma_cambiado.connect(self.config_window.apply_language)
         self.launcher.idioma_cambiado.connect(self.carg_partidas.apply_language)
         self.launcher.idioma_cambiado.connect(self.introducir_nombre.apply_language)
-        self.comprobar_usuario_local()
+        
     
 
     def mostrar_launcher(self, user_id):
