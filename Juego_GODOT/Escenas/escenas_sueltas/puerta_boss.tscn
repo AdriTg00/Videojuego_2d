@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd8yqyttqxfb6"]
+
+[ext_resource type="Texture2D" uid="uid://dtxqjxc3ew62r" path="res://Escenarios/Decorations (32x32).png" id="1_mbp0b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4it2"]
+size = Vector2(127, 14)
+
+[node name="puerta_boss" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mbp0b")
+region_enabled = true
+region_rect = Rect2(64.24714, 64.17619, 128.50159, 15.264343)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_g4it2")

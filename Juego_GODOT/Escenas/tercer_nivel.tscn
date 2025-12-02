@@ -1,12 +1,18 @@
-[gd_scene load_steps=63 format=3 uid="uid://dw4dstf7y1gw6"]
+[gd_scene load_steps=70 format=3 uid="uid://dw4dstf7y1gw6"]
 
-[ext_resource type="Script" uid="uid://b8oqvc0fe7eue" path="res://Scripts/canvas_layer_nivel1.gd" id="1_ovfxq"]
+[ext_resource type="Script" uid="uid://6b5cg2s75035" path="res://Scripts/canvas_layer_nivel3.gd" id="1_qyyts"]
 [ext_resource type="Texture2D" uid="uid://de82kdu623pnf" path="res://Escenarios/Big Diamond Hit (18x14).png" id="2_bw7q8"]
 [ext_resource type="Texture2D" uid="uid://d1b1b2vush8r3" path="res://Escenarios/Big Heart Idle (18x14).png" id="3_wbfkd"]
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="4_ttry4"]
 [ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/escenas_sueltas/pausa.tscn" id="5_wbfkd"]
 [ext_resource type="PackedScene" uid="uid://de8ylx7cosmsd" path="res://Escenas/escenas_sueltas/canvas_layer_dead.tscn" id="6_ttry4"]
 [ext_resource type="PackedScene" uid="uid://ciy8taukfwfve" path="res://Escenas/escenas_sueltas/escenario3.tscn" id="7_ttry4"]
+[ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/escenas_sueltas/moneda.tscn" id="8_yvitl"]
+[ext_resource type="PackedScene" uid="uid://dg1cka305d3cl" path="res://Escenas/escenas_sueltas/enemigo2_0.tscn" id="9_qo4cl"]
+[ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="11_0225b"]
+[ext_resource type="PackedScene" uid="uid://dd8yqyttqxfb6" path="res://Escenas/escenas_sueltas/puerta_boss.tscn" id="11_lxuvy"]
+[ext_resource type="Script" uid="uid://pymxs1ckbmi2" path="res://Escenas/escenas_sueltas/puerta_boss.gd" id="12_e4lui"]
+[ext_resource type="Script" uid="uid://dbkkwgl7x5eog" path="res://Escenas/trigger_puerta.gd" id="13_sagrm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ln3"]
 atlas = ExtResource("2_bw7q8")
@@ -423,10 +429,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="tercer_nivel" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m18tv"]
+size = Vector2(20, 185)
+
+[node name="Juego" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_ovfxq")
+script = ExtResource("1_qyyts")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 position = Vector2(26, 48.153145)
@@ -503,5 +512,59 @@ theme_override_font_sizes/font_size = 60
 
 [node name="canvas_layer_dead" parent="." instance=ExtResource("6_ttry4")]
 
-[node name="Node2D" parent="." instance=ExtResource("7_ttry4")]
+[node name="Escenario" parent="." instance=ExtResource("7_ttry4")]
 position = Vector2(-42, -3)
+
+[node name="monedas" type="Node" parent="."]
+
+[node name="moneda" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(-159, -13)
+
+[node name="moneda2" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(-92, -13)
+
+[node name="moneda3" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(60, -14)
+
+[node name="moneda4" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(-10, 142)
+
+[node name="moneda7" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(71, 303)
+
+[node name="moneda8" parent="monedas" instance=ExtResource("8_yvitl")]
+position = Vector2(124, 302)
+
+[node name="enemigos3_0" type="Node" parent="."]
+
+[node name="enemigo_bomba" parent="enemigos3_0" instance=ExtResource("9_qo4cl")]
+position = Vector2(213, 303)
+
+[node name="enemigo_bomba2" parent="enemigos3_0" instance=ExtResource("9_qo4cl")]
+position = Vector2(432, 237)
+
+[node name="enemigo_bomba3" parent="enemigos3_0" instance=ExtResource("9_qo4cl")]
+position = Vector2(622, 176)
+
+[node name="Rey" parent="." instance=ExtResource("11_0225b")]
+position = Vector2(847, 104)
+
+[node name="Camera2D" type="Camera2D" parent="Rey"]
+position = Vector2(0, -26.065)
+zoom = Vector2(3.435, 3.435)
+position_smoothing_enabled = true
+
+[node name="puerta_boss" parent="." instance=ExtResource("11_lxuvy")]
+position = Vector2(879, -2)
+rotation = 1.5707964
+script = ExtResource("12_e4lui")
+
+[node name="trigger_puerta" type="Area2D" parent="."]
+position = Vector2(999, 113)
+script = ExtResource("13_sagrm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger_puerta"]
+position = Vector2(-18, -82)
+shape = SubResource("RectangleShape2D_m18tv")
+
+[connection signal="body_entered" from="trigger_puerta" to="trigger_puerta" method="_on_body_entered"]

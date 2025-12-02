@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dg1cka305d3cl"]
+[gd_scene load_steps=37 format=3 uid="uid://dg1cka305d3cl"]
 
 [ext_resource type="Texture2D" uid="uid://chejnfi2es60s" path="res://Personajes/Cerdos/Idle (26x26).png" id="1_kptbh"]
 [ext_resource type="Script" uid="uid://30b48vic42i4" path="res://Scripts/enemigo_bomba.gd" id="1_yp6on"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bog5sjw0e78yv" path="res://Personajes/Cerdos/Dead (34x28).png" id="3_7ggyp"]
 [ext_resource type="Texture2D" uid="uid://c87rwj1fu8rij" path="res://Personajes/Cerdos/Hit (34x28).png" id="3_ngg7p"]
 [ext_resource type="Texture2D" uid="uid://kk8s7fhchu0y" path="res://Personajes/Cerdos/Throwing Boom (26x26).png" id="3_rls4e"]
+[ext_resource type="AudioStream" uid="uid://b086ebds733o7" path="res://Musica/Cerdos (mp3cut.net).mp3" id="8_1e58v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5a3k"]
 atlas = ExtResource("3_7ggyp")
@@ -236,6 +237,10 @@ shape = SubResource("RectangleShape2D_ela83")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, -32)
 shape = SubResource("RectangleShape2D_rls4e")
+
+[node name="gruñido_cerdo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1e58v")
+parameters/looping = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
