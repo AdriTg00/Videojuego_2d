@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=4 uid="uid://ciy8taukfwfve"]
+[gd_scene load_steps=10 format=4 uid="uid://ciy8taukfwfve"]
 
 [ext_resource type="Texture2D" uid="uid://cc88bhpaucupp" path="res://Escenarios/Terrain (32x32).png" id="1_ucw31"]
 [ext_resource type="Texture2D" uid="uid://dtxqjxc3ew62r" path="res://Escenarios/Decorations (32x32).png" id="2_084vy"]
-[ext_resource type="Script" uid="uid://byjiu8ojqr0ag" path="res://Scripts/pinchos.gd" id="3_k1cdt"]
 [ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="4_084vy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_avaoi"]
@@ -1208,24 +1207,6 @@ physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 15
 sources/1 = SubResource("TileSetAtlasSource_62iom")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rua0"]
-size = Vector2(27.288475, 12.890268)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_57wb1"]
-size = Vector2(17.946503, 22.89764)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8n60o"]
-size = Vector2(49, 33.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6nd3"]
-size = Vector2(11.128115, 21.829239)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q26ui"]
-size = Vector2(14.135729, 23.106232)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4phh"]
-size = Vector2(10.827354, 24.439255)
-
 [node name="Node2D" type="StaticBody2D"]
 
 [node name="Foreground" type="TileMapLayer" parent="."]
@@ -1239,38 +1220,6 @@ tile_set = SubResource("TileSet_eo8rc")
 [node name="plataforma" type="TileMapLayer" parent="."]
 position = Vector2(-301, 634)
 tile_set = SubResource("TileSet_nnf1d")
-
-[node name="Pinchos" type="Area2D" parent="." groups=["pinchos"]]
-script = ExtResource("3_k1cdt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pinchos"]
-position = Vector2(1376.0001, 426)
-scale = Vector2(1.9055665, 2.6226487)
-shape = SubResource("RectangleShape2D_3rua0")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pinchos"]
-position = Vector2(1779.8751, 233.60172)
-scale = Vector2(3.663679, 1.3627356)
-shape = SubResource("RectangleShape2D_57wb1")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Pinchos"]
-position = Vector2(1439, 299)
-shape = SubResource("RectangleShape2D_8n60o")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(1374, 429)
-scale = Vector2(3.3249068, 1.1252382)
-shape = SubResource("RectangleShape2D_j6nd3")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(1781.4999, 237)
-scale = Vector2(3.3249068, 1.1252382)
-shape = SubResource("RectangleShape2D_q26ui")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
-position = Vector2(1437, 301.00003)
-scale = Vector2(3.3249068, 1.1252382)
-shape = SubResource("RectangleShape2D_n4phh")
 
 [node name="Rey" parent="." instance=ExtResource("4_084vy")]
 position = Vector2(-35, -37)
