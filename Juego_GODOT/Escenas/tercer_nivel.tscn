@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dw4dstf7y1gw6"]
+[gd_scene load_steps=71 format=3 uid="uid://dw4dstf7y1gw6"]
 
 [ext_resource type="Script" uid="uid://6b5cg2s75035" path="res://Scripts/canvas_layer_nivel3.gd" id="1_qyyts"]
 [ext_resource type="Texture2D" uid="uid://de82kdu623pnf" path="res://Escenarios/Big Diamond Hit (18x14).png" id="2_bw7q8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/escenas_sueltas/pausa.tscn" id="5_wbfkd"]
 [ext_resource type="PackedScene" uid="uid://de8ylx7cosmsd" path="res://Escenas/escenas_sueltas/canvas_layer_dead.tscn" id="6_ttry4"]
 [ext_resource type="PackedScene" uid="uid://ciy8taukfwfve" path="res://Escenas/escenas_sueltas/escenario3.tscn" id="7_ttry4"]
+[ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/escenas_sueltas/puerta.tscn" id="8_e4lui"]
 [ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/escenas_sueltas/moneda.tscn" id="8_yvitl"]
 [ext_resource type="PackedScene" uid="uid://dg1cka305d3cl" path="res://Escenas/escenas_sueltas/enemigo2_0.tscn" id="9_qo4cl"]
 [ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="11_0225b"]
@@ -515,6 +516,9 @@ theme_override_font_sizes/font_size = 60
 [node name="Escenario" parent="." instance=ExtResource("7_ttry4")]
 position = Vector2(-42, -3)
 
+[node name="Puerta" parent="." instance=ExtResource("8_e4lui")]
+position = Vector2(-201, -31)
+
 [node name="monedas" type="Node" parent="."]
 
 [node name="moneda" parent="monedas" instance=ExtResource("8_yvitl")]
@@ -547,7 +551,7 @@ position = Vector2(432, 237)
 position = Vector2(622, 176)
 
 [node name="Rey" parent="." instance=ExtResource("11_0225b")]
-position = Vector2(847, 104)
+position = Vector2(-192, -19)
 
 [node name="Camera2D" type="Camera2D" parent="Rey"]
 position = Vector2(0, -26.065)
