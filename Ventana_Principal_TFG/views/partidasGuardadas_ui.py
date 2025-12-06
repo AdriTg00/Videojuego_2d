@@ -19,39 +19,39 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLay
     QHeaderView, QLabel, QSizePolicy, QSpacerItem,
     QTableWidget, QTableWidgetItem, QWidget)
 
-class Ui_partidasGuardadas(object):
-    def setupUi(self, partidasGuardadas):
-        if not partidasGuardadas.objectName():
-            partidasGuardadas.setObjectName(u"partidasGuardadas")
-        partidasGuardadas.resize(575, 359)
-        partidasGuardadas.setStyleSheet(u"background-color: #faf0d6;")
-        self.gridLayout_3 = QGridLayout(partidasGuardadas)
+class Ui_partidaGuardada(object):
+    def setupUi(self, partidaGuardada):
+        if not partidaGuardada.objectName():
+            partidaGuardada.setObjectName(u"partidaGuardada")
+        partidaGuardada.resize(575, 359)
+        partidaGuardada.setStyleSheet(u"background-color: #faf0d6;")
+        self.gridLayout_3 = QGridLayout(partidaGuardada)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.frame_2 = QFrame(partidasGuardadas)
+        self.frame_2 = QFrame(partidaGuardada)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_2 = QGridLayout(self.frame_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.partidasGuardadas_2 = QLabel(self.frame_2)
-        self.partidasGuardadas_2.setObjectName(u"partidasGuardadas_2")
+        self.partidasGuardadas = QLabel(self.frame_2)
+        self.partidasGuardadas.setObjectName(u"partidasGuardadas")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.partidasGuardadas_2.sizePolicy().hasHeightForWidth())
-        self.partidasGuardadas_2.setSizePolicy(sizePolicy)
-        self.partidasGuardadas_2.setMaximumSize(QSize(500, 300))
-        self.partidasGuardadas_2.setStyleSheet(u"QLabel {\n"
+        sizePolicy.setHeightForWidth(self.partidasGuardadas.sizePolicy().hasHeightForWidth())
+        self.partidasGuardadas.setSizePolicy(sizePolicy)
+        self.partidasGuardadas.setMaximumSize(QSize(500, 300))
+        self.partidasGuardadas.setStyleSheet(u"QLabel {\n"
 "    color: #3C3C3C;\n"
 "    font-size: 30px;\n"
 "    font-weight: bold;\n"
 "}")
-        self.partidasGuardadas_2.setTextFormat(Qt.TextFormat.AutoText)
-        self.partidasGuardadas_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.partidasGuardadas_2.setWordWrap(False)
-        self.partidasGuardadas_2.setOpenExternalLinks(False)
+        self.partidasGuardadas.setTextFormat(Qt.TextFormat.AutoText)
+        self.partidasGuardadas.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.partidasGuardadas.setWordWrap(False)
+        self.partidasGuardadas.setOpenExternalLinks(False)
 
-        self.gridLayout_2.addWidget(self.partidasGuardadas_2, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
 
 
         self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
@@ -60,7 +60,7 @@ class Ui_partidasGuardadas(object):
 
         self.gridLayout_3.addItem(self.verticalSpacer, 0, 0, 1, 1)
 
-        self.frame = QFrame(partidasGuardadas)
+        self.frame = QFrame(partidaGuardada)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
@@ -178,27 +178,27 @@ class Ui_partidasGuardadas(object):
         self.gridLayout_3.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
 
 
-        self.retranslateUi(partidasGuardadas)
+        self.retranslateUi(partidaGuardada)
 
-        QMetaObject.connectSlotsByName(partidasGuardadas)
+        QMetaObject.connectSlotsByName(partidaGuardada)
     # setupUi
 
-    def retranslateUi(self, partidasGuardadas):
-        partidasGuardadas.setWindowTitle(QCoreApplication.translate("partidasGuardadas", u"Form", None))
-        self.partidasGuardadas_2.setText(QCoreApplication.translate("partidasGuardadas", u"Partidas guardadas:", None))
+    def retranslateUi(self, partidaGuardada):
+        partidaGuardada.setWindowTitle(QCoreApplication.translate("partidaGuardada", u"Form", None))
+        self.partidasGuardadas.setText(QCoreApplication.translate("partidaGuardada", u"Partidas guardadas:", None))
         ___qtablewidgetitem = self.tablaGuardados.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("partidasGuardadas", u"Jugador", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("partidaGuardada", u"Jugador", None));
         ___qtablewidgetitem1 = self.tablaGuardados.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("partidasGuardadas", u"Nivel", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("partidaGuardada", u"Nivel", None));
         ___qtablewidgetitem2 = self.tablaGuardados.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("partidasGuardadas", u"Muertes", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("partidaGuardada", u"Muertes", None));
         ___qtablewidgetitem3 = self.tablaGuardados.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("partidasGuardadas", u"Puntuacion", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("partidaGuardada", u"Puntuacion", None));
         ___qtablewidgetitem4 = self.tablaGuardados.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("partidasGuardadas", u"Tiempo", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("partidaGuardada", u"Tiempo", None));
         ___qtablewidgetitem5 = self.tablaGuardados.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("partidasGuardadas", u"Fecha", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("partidaGuardada", u"Fecha", None));
         ___qtablewidgetitem6 = self.tablaGuardados.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("partidasGuardadas", u"ID", None));
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("partidaGuardada", u"ID", None));
     # retranslateUi
 

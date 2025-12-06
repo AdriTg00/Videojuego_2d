@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>partidasGuardadas</class>
- <widget class="QWidget" name="partidasGuardadas">
+ <class>partidaGuardada</class>
+ <widget class="QWidget" name="partidaGuardada">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,7 +27,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QLabel" name="partidasGuardadas_2">
+       <widget class="QLabel" name="partidasGuardadas">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
