@@ -22,15 +22,62 @@ jobs:
           echo "Triggering workflow name: ${{ github.event.workflow_run.name }}"
           echo "Triggering workflow conclusion: ${{ github.event.workflow_run.conclusion }}"
 
-      - name: Download Launcher artifact
+      - name: Find launcher run that contains artifact (GitHub API)
+        id: find_run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          WORKFLOW_FILE: "Python-app.yml"    # fichero del workflow que sube el launcher
+          ARTIFACT_NAME: "Launcher_Videojuego_exe"
+        run: |
+          set -euo pipefail
+          owner_repo="${REPO}"
+          workflow="${WORKFLOW_FILE}"
+          artifact="${ARTIFACT_NAME}"
+          per_page=50
+          found=""
+
+          # Miramos hasta 5 páginas de runs (50 * 5 = 250 runs), ajusta si necesitas más
+          page=1
+          while [ -z "$found" ] && [ $page -le 5 ]; do
+            runs_json=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${owner_repo}/actions/workflows/${workflow}/runs?per_page=${per_page}&page=${page}")
+            # iteramos runs exitosos en orden (más reciente primero)
+            echo "$runs_json" | jq -r '.workflow_runs[] | select(.conclusion=="success") | .id' | while read -r run_id; do
+              artifacts_json=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${owner_repo}/actions/runs/${run_id}/artifacts")
+              has=$(echo "$artifacts_json" | jq -r --arg name "$artifact" '.artifacts[]?.name | select(. == $name)' || true)
+              if [ -n "$has" ]; then
+                echo "Found artifact ${artifact} in run ${run_id}" >&2
+                found="$run_id"
+                # exportamos variable de entorno para romper el while exterior
+                echo "$found" > /tmp/found_run_id
+                break
+              fi
+            done
+
+            if [ -f /tmp/found_run_id ]; then
+              found=$(cat /tmp/found_run_id)
+            fi
+
+            page=$((page+1))
+          done
+
+          if [ -n "$found" ]; then
+            echo "run_id=$found" >> $GITHUB_OUTPUT
+          else
+            echo "No run with artifact ${artifact} found among last $((per_page*5)) runs" >&2
+            echo "run_id=" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+      - name: Download Launcher artifact (using found run)
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "Python-app.yml"           # nombre del fichero en .github/workflows/
+          workflow: "Python-app.yml"
+          run_id: ${{ steps.find_run.outputs.run_id }}
           name: "Launcher_Videojuego_exe"
           path: package/launcher
-          branch: main
-          workflow_conclusion: success
+          # branch: main    # opcional, coméntalo mientras debuggeas
 
       - name: Download Godot artifact
         uses: dawidd6/action-download-artifact@v2
