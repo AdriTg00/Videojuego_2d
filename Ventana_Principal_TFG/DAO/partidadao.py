@@ -6,7 +6,7 @@ BASE_URL = "https://flask-server-9ymz.onrender.com"
 class PartidasDAO:
     def __init__(self):
         self.session = requests.Session()
-        self.default_timeout = 20
+        self.default_timeout = 25
 
     def obtener_partidas(self, nombre):
         r = self.session.get(f"{BASE_URL}/jugadores/{nombre}/partidas", timeout=self.default_timeout)
