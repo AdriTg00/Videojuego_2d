@@ -17,7 +17,6 @@ class AppController:
         self.carg_partidas = cargar(self.app_state)
         self.introducir_nombre = introducirNombre(self.app_state)
         self.comprobar_usuario_local()
-        self.introducir_nombre.nombre_validado.connect(self.mostrar_launcher)
         self.launcher.abrir_config_signal.connect(self.mostrar_configuracion)
         self.launcher.abrir_cargar_signal.connect(self.mostrar_partidas_guardadas)
         self.launcher.abrir_nueva_signal.connect(self.abrir_nueva_partida)
@@ -53,7 +52,7 @@ class AppController:
             with open("usuario_local.json", "r") as f:
                 datos = json.load(f)
 
-            print("Usuario ya registrado → entrando directo al launcher")
+            print("Usuario ya registrado, entrando directo al launcher")
             self.mostrar_launcher(datos["id"])
             self.launcher.show()
         else:
