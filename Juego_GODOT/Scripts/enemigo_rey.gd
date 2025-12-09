@@ -22,9 +22,6 @@ var muerto := false
 var recibiendo_daño := false
 var direccion := 1
 var en_persecucion := false
-var patrullando := false
-var cancelando_patruya := false
-var en_pausa_colision := false  
 var invulnerable := false
 var vida = 10
 
@@ -43,13 +40,12 @@ func _physics_process(delta):
 	if muerto:
 		return
 	_aplicar_gravedad(delta)
-
-
+	
 	if recibiendo_daño:
 		move_and_slide()
 		return
 
-	if en_persecucion and jugador and not en_pausa_colision:
+	if en_persecucion and jugador:
 		_perseguir_jugador()
 
 	move_and_slide()
@@ -90,18 +86,6 @@ func _colisiona_con_jugador() -> bool:
 
 
 
-# --- SE DETIENE AL CHOCAR ---
-func _pausa_idle_colision():
-	if recibiendo_daño:
-		return
-	en_pausa_colision = true
-	velocity.x = 0
-	await get_tree().create_timer(tiempo_idle_colision).timeout
-	en_pausa_colision = false
-
-
-
-
 func recibir_dano(cantidad: int = 1):
 	if muerto or invulnerable:
 		return
@@ -130,29 +114,10 @@ func recibir_dano(cantidad: int = 1):
 	invulnerable = false
 	
 	
-	
-	
-
-
-func _patrol_loop():
-	await get_tree().process_frame
-	while not muerto and not en_persecucion:
-		anim.play("run")
-		velocity.x = direccion * velocidad
-		anim.flip_h = direccion > 0
-		await get_tree().create_timer(1.0).timeout
-		anim.play("idle")
-		velocity.x = 0
-		await get_tree().create_timer(2.0).timeout
-		direccion *= -1
-	patrullando = false
-	
-	
 
 func _morir():
 	muerto = true
 	en_persecucion = false
-	patrullando = false
 	var hud = get_tree().root.get_node("Juego/CanvasLayer")
 	hud.añadir_moneda(3)
 	print("El cerdo ha muerto")
@@ -191,12 +156,18 @@ func _on_jugador_salio(cuerpo):
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	en_persecucion = false
+	velocity.x = 0
+	anim.play("attack")
 	if not body:
 			return
 	if not body.has_method("recibir_dano"):
 			return
-	anim.play("attack")
-	await anim.animation_finished
+	
+	
 	if body and body.is_inside_tree() and body.has_method("recibir_dano"):
 		body.recibir_dano(1)
+	await anim.animation_finished
+	en_persecucion = true
+	
 		
