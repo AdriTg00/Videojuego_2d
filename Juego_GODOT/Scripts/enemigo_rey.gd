@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var detector_area = $Area2D
 @onready var detector_salto = $detector_salto
 @onready var gruñido = $"gruñido_cerdo"
+@onready var area_ataque = $attackArea
 
 
 # --- Parámetros exportados ---
@@ -34,7 +35,8 @@ const IMPULSO_SALTO = -400.0
 func _ready():
 	detector_area.body_entered.connect(_on_jugador_entro)
 	detector_area.body_exited.connect(_on_jugador_salio)
-	_iniciar_patruya()
+	area_ataque.body_entered.connect(_on_attack_area_body_entered)
+	
 
 
 func _physics_process(delta):
@@ -42,15 +44,13 @@ func _physics_process(delta):
 		return
 	_aplicar_gravedad(delta)
 
-	# Prioridad máxima: si está recibiendo daño, no hace nada más
+
 	if recibiendo_daño:
 		move_and_slide()
 		return
 
 	if en_persecucion and jugador and not en_pausa_colision:
 		_perseguir_jugador()
-	elif not patrullando and not en_pausa_colision:
-		_iniciar_patruya()
 
 	move_and_slide()
 
@@ -68,11 +68,7 @@ func _aplicar_gravedad(delta):
 # --- PERSEGUIR AL JUGADOR ---
 func _perseguir_jugador():
 	var dist = global_position.distance_to(jugador.global_position)
-	# Si el jugador sale del rango
-	if dist > rango_persecucion:
-		en_persecucion = false
-		_iniciar_patruya()
-		return
+
 
 	# Dirección hacia el jugador
 	var dir = sign(jugador.global_position.x - global_position.x)
@@ -104,11 +100,7 @@ func _pausa_idle_colision():
 	en_pausa_colision = false
 
 
-# --- PATRULLA (igual que antes, reducida) ---
-func _iniciar_patruya():
-	gruñido.stop()
-	patrullando = true
-	_patrol_loop()
+
 
 func recibir_dano(cantidad: int = 1):
 	if muerto or invulnerable:
@@ -199,10 +191,12 @@ func _on_jugador_salio(cuerpo):
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if body.name == "Rey":
-		anim.play("attack")
-		await anim.animation_finished
-		jugador = body
-		if jugador and jugador.has_method("recibir_dano"):
-			jugador.recibir_dano(1)
+	if not body:
+			return
+	if not body.has_method("recibir_dano"):
+			return
+	anim.play("attack")
+	await anim.animation_finished
+	if body and body.is_inside_tree() and body.has_method("recibir_dano"):
+		body.recibir_dano(1)
 		
