@@ -552,7 +552,7 @@ position = Vector2(432, 237)
 position = Vector2(622, 176)
 
 [node name="Rey" parent="." instance=ExtResource("11_0225b")]
-position = Vector2(982, 97)
+position = Vector2(881, 103)
 
 [node name="Camera2D" type="Camera2D" parent="Rey"]
 position = Vector2(0, -26.065)
@@ -574,5 +574,6 @@ shape = SubResource("RectangleShape2D_m18tv")
 
 [node name="ReyCerdo" parent="." instance=ExtResource("15_sagrm")]
 position = Vector2(1201, 102.99999)
+scale = Vector2(1.347812, 1.347812)
 
 [connection signal="body_entered" from="trigger_puerta" to="trigger_puerta" method="_on_body_entered"]

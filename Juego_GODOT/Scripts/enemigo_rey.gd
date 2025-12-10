@@ -6,11 +6,13 @@ extends CharacterBody2D
 @onready var detector_salto = $detector_salto
 @onready var gruñido = $"gruñido_cerdo"
 @onready var area_ataque = $attackArea
+@onready var dialogo = $dialogo
+
 
 
 # --- Parámetros exportados ---
 @export var margen_colision: float = 20.0
-@export var velocidad: float = 40.0
+@export var velocidad: float = 30.0
 @export var gravedad: float = 1200.0
 @export var max_caida: float = 1000.0
 @export var rango_persecucion: float = 250.0
@@ -24,8 +26,11 @@ var direccion := 1
 var en_persecucion := false
 var invulnerable := false
 var vida = 10
+var velocidad_sumar := 0
+
 
 # --- Constantes ---
+
 const IMPULSO_SALTO = -400.0
 
 
@@ -33,6 +38,7 @@ func _ready():
 	detector_area.body_entered.connect(_on_jugador_entro)
 	detector_area.body_exited.connect(_on_jugador_salio)
 	area_ataque.body_entered.connect(_on_attack_area_body_entered)
+	
 	
 
 
@@ -66,9 +72,13 @@ func _perseguir_jugador():
 	var dist = global_position.distance_to(jugador.global_position)
 	# Dirección hacia el jugador
 	var dir = sign(jugador.global_position.x - global_position.x)
-	velocity.x = dir * velocidad
+	if dir < 0:
+		velocity.x = dir * velocidad - velocidad_sumar
+	else:
+		velocity.x = dir * velocidad + velocidad_sumar
 	anim.flip_h = dir > 0
 	anim.play("run")
+
 
 	# Si ya está tocando al jugador
 	
@@ -85,30 +95,33 @@ func _colisiona_con_jugador() -> bool:
 
 
 func recibir_dano(cantidad: int = 1):
+	velocidad_sumar += 10
+	dialogo.reproducir("angry", 2.0)
+
 	if muerto or invulnerable:
 		return
 	recibiendo_daño = true
 	vida -= cantidad
 	print("El cerdo recibió daño. Vida restante:", vida)
-	
 	if vida <= 0:
 		_morir()
 		return
-	
-	invulnerable = true	
+	invulnerable = true
 
-	
-	# --- Animación y retroceso ---
 	anim.play("hit")
-	
-	var dir_retroceso = sign(global_position.x - jugador.global_position.x)
-	velocity.x = dir_retroceso * 50         
-	# --- Aplica la física normal una sola vez ---
+
+	var dir_retroceso = 0
+	if jugador:
+		dir_retroceso = sign(global_position.x - jugador.global_position.x)
+	else:
+		dir_retroceso = -direccion  # retrocede hacia el lado opuesto al que mira
+
+	velocity.x = dir_retroceso * 50
 	move_and_slide()
 	await anim.animation_finished
-	
 	recibiendo_daño = false
 	invulnerable = false
+
 	
 	
 
@@ -165,6 +178,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body and body.is_inside_tree() and body.has_method("recibir_dano"):
 		body.recibir_dano(1)
 	await anim.animation_finished
+	anim.play("idle")
 	var tiempo := 1
 	await get_tree().create_timer(tiempo).timeout
 	en_persecucion = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://crggh85jlx3mc"]
+[gd_scene load_steps=42 format=3 uid="uid://crggh85jlx3mc"]
 
 [ext_resource type="Script" uid="uid://dxpj4xtss0yrp" path="res://Scripts/enemigo_rey.gd" id="1_ss444"]
 [ext_resource type="Texture2D" uid="uid://2syefjpgam0c" path="res://Personajes/rey cerdo/Attack (38x28).png" id="2_td2vs"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://4ssmstgt2c0" path="res://Personajes/rey cerdo/Hit (38x28).png" id="4_td2vs"]
 [ext_resource type="Texture2D" uid="uid://b0ceded4ri07h" path="res://Personajes/rey cerdo/Run (38x28).png" id="5_7kyiy"]
 [ext_resource type="AudioStream" uid="uid://b086ebds733o7" path="res://Musica/Cerdos (mp3cut.net).mp3" id="6_xctv0"]
+[ext_resource type="PackedScene" uid="uid://ba33ko8dg8vyl" path="res://Escenas/escenas_sueltas/dialogos.tscn" id="8_hf50s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omklf"]
+size = Vector2(8.248661, 25.519478)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m2gyi"]
 atlas = ExtResource("2_td2vs")
@@ -243,16 +247,20 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ume2m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_omklf"]
-size = Vector2(8.248661, 25.519478)
-
 [node name="ReyCerdo" type="CharacterBody2D"]
 scale = Vector2(1.5233023, 1.5233023)
 script = ExtResource("1_ss444")
 
+[node name="attackArea" type="Area2D" parent="."]
+scale = Vector2(2.2839694, 1.2887033)
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
+shape = SubResource("RectangleShape2D_omklf")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bs88w")
-animation = &"idle"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.6564685, 4.595279)
@@ -266,17 +274,12 @@ position = Vector2(8, -37)
 scale = Vector2(13.117, 5.154)
 shape = SubResource("RectangleShape2D_ume2m")
 
-[node name="attackArea" type="Area2D" parent="."]
-scale = Vector2(1.4993538, 0.8459931)
-collision_mask = 255
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
-position = Vector2(-9.886367, -1.9837651)
-shape = SubResource("RectangleShape2D_omklf")
-
 [node name="gruñido_cerdo" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(1.0000001, 1.0000001)
 stream = ExtResource("6_xctv0")
 parameters/looping = true
+
+[node name="dialogo" parent="." instance=ExtResource("8_hf50s")]
+position = Vector2(0, -17.068182)
 
 [connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]
