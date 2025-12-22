@@ -3,10 +3,9 @@ name: Combine Game and Launcher Builds
 on:
   workflow_run:
     workflows:
-      - Build Godot Windows EXE
+      - Build Qt Application
     types:
       - completed
-
 jobs:
   package:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
