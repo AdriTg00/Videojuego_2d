@@ -553,7 +553,7 @@ position = Vector2(432, 237)
 position = Vector2(622, 176)
 
 [node name="Rey" parent="." instance=ExtResource("11_0225b")]
-position = Vector2(-192, -18)
+position = Vector2(-193, -19)
 
 [node name="Camera2D" type="Camera2D" parent="Rey"]
 position = Vector2(0, -26.065)

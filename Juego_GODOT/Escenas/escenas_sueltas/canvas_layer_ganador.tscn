@@ -35,6 +35,11 @@ theme_override_font_sizes/font_size = 80
 text = "WIN¡¡
 "
 
+[node name="stats" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x6kxi")
+theme_override_font_sizes/font_size = 40
+
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_x6kxi")
