@@ -1,6 +1,7 @@
 
 usuario_local.json
 configuracion.db
+runtime/launch_token.json
 *.log
 __pycache__/
 *.pyc
