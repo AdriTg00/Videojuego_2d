@@ -7,7 +7,6 @@ from translator import TRANSLATIONS
 
 class cargar(QWidget):
     partida_seleccionada = Signal(int)
-
     def __init__(self, app_state,  parent=None):
         super().__init__(parent)
         self.ui = Ui_partidaGuardada()
