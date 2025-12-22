@@ -44,18 +44,20 @@ jobs:
   build_godot:
     name: Build Godot Game
     runs-on: windows-latest
-
+  
     steps:
       - uses: actions/checkout@v4
-
+  
       - name: Download Godot
-        uses: firebelley/godot-export@master
-        with:
-          godot-version: "4.2.1"
-          export-template-version: "4.2.1"
-          relative-project-path: "Juego_GODOT"
-          export-presets: "Windows Desktop"
-
+        run: |
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_win64.exe.zip
+          tar -xf godot.zip
+          ren Godot_v4.2.1-stable_win64.exe godot.exe
+  
+      - name: Export Godot project
+        run: |
+          godot.exe --headless --path Juego_GODOT --export-release "Windows Desktop" export/Juego.exe
+  
       - name: Upload Godot artifact
         uses: actions/upload-artifact@v4
         with:
@@ -63,6 +65,8 @@ jobs:
           path: |
             Juego_GODOT/export/*.exe
             Juego_GODOT/export/*.pck
+
+
 
   # =====================================================
   # PACKAGE DIST (FINAL)
