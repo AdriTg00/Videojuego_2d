@@ -2,42 +2,43 @@ name: Combine Game and Launcher Builds
 
 on:
   workflow_run:
-    workflows: ["Build Godot Windows EXE", "Python application"]
+    workflows:
+      - Build Godot Windows EXE
     types:
       - completed
 
 jobs:
   package:
- 
-    if: ${{ github.event.workflow_run.name == 'Build Godot Windows EXE' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+   
       - name: Download Launcher artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "Python-app.yml"
+          workflow: "Python application"
           name: "Launcher_Videojuego_exe"
-          path: package/launcher
           branch: main
           workflow_conclusion: success
+          path: package/launcher
 
-     
+
       - name: Download Godot artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "build_godot.yml"
+          workflow: "Build Godot Windows EXE"
           name: "windows-build"
-          path: package/game
           branch: main
           workflow_conclusion: success
+          path: package/game
 
-  
+
       - name: Combine builds
         run: |
           mkdir -p final_package
@@ -45,13 +46,8 @@ jobs:
           cp package/game/*.exe final_package/Juego_GODOT.exe
           cp package/game/*.pck final_package/Juego_GODOT.pck
           echo "Build combinado el $(date)" > final_package/README.txt
-          echo "" >> final_package/README.txt
-          echo "Contenido del paquete:" >> final_package/README.txt
-          echo "- Launcher_Videojuego.exe" >> final_package/README.txt
-          echo "- Juego_GODOT.exe" >> final_package/README.txt
-          echo "- Juego_GODOT.pck" >> final_package/README.txt
-          cd final_package
-          zip -r Combined_Build.zip .
+          zip -r final_package/Combined_Build.zip final_package/*
+
       - name: Upload combined package
         uses: actions/upload-artifact@v4
         with:
