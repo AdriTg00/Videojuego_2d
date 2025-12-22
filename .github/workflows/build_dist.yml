@@ -1,110 +1,70 @@
-name: Build Launcher and Game (Dist)
+name: Combine Game and Launcher Builds
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Build Godot Windows EXE
+    types:
+      - completed
 
 jobs:
-  # =====================================================
-  # BUILD LAUNCHER (PYTHON / PYSIDE)
-  # =====================================================
-  build_launcher:
-    name: Build Launcher
-    runs-on: windows-latest
+  package:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Download Launcher artifact
+        uses: dawidd6/action-download-artifact@v2
         with:
-          python-version: "3.11"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "Build Qt Application"
+          name: "launcher-build"
+          branch: main
+          workflow_conclusion: success
+          path: temp/launcher
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r Ventana_Principal_TFG/requirements.txt
-          pip install pyinstaller
-
-      - name: Build Launcher EXE
-        run: |
-          cd Ventana_Principal_TFG
-          pyinstaller --onefile --windowed main.py --name Launcher
-
-      - name: Upload Launcher artifact
-        uses: actions/upload-artifact@v4
+      - name: Download Godot artifact
+        uses: dawidd6/action-download-artifact@v2
         with:
-          name: launcher-build
-          path: Ventana_Principal_TFG/dist/Launcher.exe
-
-  # =====================================================
-  # BUILD GODOT GAME
-  # =====================================================
-  build_godot:
-    name: Build Godot Game
-    runs-on: windows-latest
-  
-    steps:
-      - uses: actions/checkout@v4
-  
-      - name: Download Godot
-        run: |
-          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_win64.exe.zip
-          tar -xf godot.zip
-          ren Godot_v4.2.1-stable_win64.exe godot.exe
-  
-      - name: Export Godot project
-        run: |
-          .\godot.exe --headless --path Juego_GODOT --export-release "Windows Desktop" export/Juego.exe
-  
-      - name: Upload Godot artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: godot-build
-          path: |
-            Juego_GODOT/export/*.exe
-            Juego_GODOT/export/*.pck
-
-
-
-
-  # =====================================================
-  # PACKAGE DIST (FINAL)
-  # =====================================================
-  package_dist:
-    name: Package Dist Folder
-    runs-on: windows-latest
-    needs: [ build_launcher, build_godot ]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download Launcher
-        uses: actions/download-artifact@v4
-        with:
-          name: launcher-build
-          path: tmp/launcher
-
-      - name: Download Game
-        uses: actions/download-artifact@v4
-        with:
-          name: godot-build
-          path: tmp/game
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "Build Godot Windows EXE"
+          name: "game-build"
+          branch: main
+          workflow_conclusion: success
+          path: temp/game
 
       - name: Create Dist structure
         run: |
-          mkdir Dist
-          mkdir Dist\game
-          mkdir Dist\runtime
-          mkdir Dist\config
+          mkdir -p Dist/game
+          mkdir -p Dist/runtime
+          mkdir -p Dist/config
+          
+          # Copiar Launcher a raíz de Dist
+          cp temp/launcher/Launcher.exe Dist/
+          
+          # Copiar game files a Dist/game
+          cp temp/game/*.exe Dist/game/Juego.exe
+          cp temp/game/*.pck Dist/game/Juego.pck
+          
+          # Crear README
+          echo "Build combinado el $(date)" > Dist/README.txt
+          echo "" >> Dist/README.txt
+          echo "Estructura:" >> Dist/README.txt
+          echo "- Launcher.exe: Ejecuta este archivo para iniciar el juego" >> Dist/README.txt
+          echo "- game/: Contiene los archivos del juego" >> Dist/README.txt
+          echo "- runtime/: (Vacío por ahora)" >> Dist/README.txt
+          echo "- config/: (Vacío por ahora)" >> Dist/README.txt
 
-          copy tmp\launcher\Launcher.exe Dist\Launcher.exe
-          copy tmp\game\*.exe Dist\game\Juego.exe
-          copy tmp\game\*.pck Dist\game\Juego.pck
+      - name: Create ZIP package
+        run: |
+          cd Dist
+          zip -r ../Combined_Build.zip ./*
 
-      - name: Upload final Dist package
+      - name: Upload combined package
         uses: actions/upload-artifact@v4
         with:
-          name: Dist_Package
-          path: Dist
+          name: Combined_Game_and_Launcher
+          path: Combined_Build.zip
