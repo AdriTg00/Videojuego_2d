@@ -1,0 +1,105 @@
+name: Build Launcher and Game (Dist)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # =====================================================
+  # BUILD LAUNCHER (PYTHON / PYSIDE)
+  # =====================================================
+  build_launcher:
+    name: Build Launcher
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r Ventana_Principal_TFG/requirements.txt
+          pip install pyinstaller
+
+      - name: Build Launcher EXE
+        run: |
+          cd Ventana_Principal_TFG
+          pyinstaller --onefile --windowed main.py --name Launcher
+
+      - name: Upload Launcher artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: launcher-build
+          path: Ventana_Principal_TFG/dist/Launcher.exe
+
+  # =====================================================
+  # BUILD GODOT GAME
+  # =====================================================
+  build_godot:
+    name: Build Godot Game
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Godot
+        uses: firebelley/godot-export@master
+        with:
+          godot-version: "4.2.1"
+          export-template-version: "4.2.1"
+          relative-project-path: "Juego_GODOT"
+          export-presets: "Windows Desktop"
+
+      - name: Upload Godot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: godot-build
+          path: |
+            Juego_GODOT/export/*.exe
+            Juego_GODOT/export/*.pck
+
+  # =====================================================
+  # PACKAGE DIST (FINAL)
+  # =====================================================
+  package_dist:
+    name: Package Dist Folder
+    runs-on: windows-latest
+    needs: [ build_launcher, build_godot ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Launcher
+        uses: actions/download-artifact@v4
+        with:
+          name: launcher-build
+          path: tmp/launcher
+
+      - name: Download Game
+        uses: actions/download-artifact@v4
+        with:
+          name: godot-build
+          path: tmp/game
+
+      - name: Create Dist structure
+        run: |
+          mkdir Dist
+          mkdir Dist\game
+          mkdir Dist\runtime
+          mkdir Dist\config
+
+          copy tmp\launcher\Launcher.exe Dist\Launcher.exe
+          copy tmp\game\*.exe Dist\game\Juego.exe
+          copy tmp\game\*.pck Dist\game\Juego.pck
+
+      - name: Upload final Dist package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dist_Package
+          path: Dist
