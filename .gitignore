@@ -1,0 +1,11 @@
+
+usuario_local.json
+configuracion.db
+*.log
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+Juego_GODOT/.godot/
+Juego_GODOT/.import/
