@@ -1,75 +1,76 @@
 name: Combine Game and Launcher Builds
 
 on:
-  workflow_run:
-    workflows:
-      - Build Qt Application
-    types:
-      - completed
+  workflow_dispatch:
+
 jobs:
   package:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # ----------------------------------------
-      # Descargar Launcher
-      # ----------------------------------------
-      - name: Download Launcher artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "Build Qt Application"
-          name: "Launcher_Videojuego_exe"
-          branch: main
-          workflow_conclusion: success
-          path: package/launcher
+      # ---------------------------------------
+      # Descargar último Launcher exitoso
+      # ---------------------------------------
+      - name: Download latest Launcher build
+        run: |
+          echo "Buscando último build exitoso del Launcher..."
 
-      # ----------------------------------------
-      # Descargar Juego Godot
-      # ----------------------------------------
-      - name: Download Godot artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "Build Godot Windows EXE"
-          name: "windows-build"
-          branch: main
-          workflow_conclusion: success
-          path: package/game
+          RUN_ID=$(gh run list \
+            --workflow "Build Qt Application" \
+            --branch main \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
 
-      # ----------------------------------------
-      # Combinar builds con estructura limpia
-      # ----------------------------------------
+          echo "Launcher run id: $RUN_ID"
+
+          gh run download "$RUN_ID" \
+            --name Launcher_Videojuego_exe \
+            --dir package/launcher
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---------------------------------------
+      # Descargar último Godot exitoso
+      # ---------------------------------------
+      - name: Download latest Godot build
+        run: |
+          echo "Buscando último build exitoso de Godot..."
+
+          RUN_ID=$(gh run list \
+            --workflow "Build Godot Windows EXE" \
+            --branch main \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+
+          echo "Godot run id: $RUN_ID"
+
+          gh run download "$RUN_ID" \
+            --name windows-build \
+            --dir package/game
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---------------------------------------
+      # Combinar estructura final
+      # ---------------------------------------
       - name: Combine builds
         run: |
-          echo "Creando estructura final..."
+          mkdir -p final_package/game final_package/runtime
 
-          mkdir -p final_package/game
-          mkdir -p final_package/runtime
-
-          # Launcher (raíz)
           cp package/launcher/*.exe final_package/Launcher_Videojuego.exe
-
-          # Juego (carpeta game)
           cp package/game/*.exe final_package/game/Juego.exe
           cp package/game/*.pck final_package/game/Juego.pck
 
-          # README
-          echo "Build combinado generado el $(date)" > final_package/README.txt
-
-          # ZIP final
           cd final_package
           zip -r Combined_Build.zip .
 
-      # ----------------------------------------
-      # Subir artefacto final
-      # ----------------------------------------
-      - name: Upload combined package
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: Combined_Game_and_Launcher
           path: final_package/Combined_Build.zip
