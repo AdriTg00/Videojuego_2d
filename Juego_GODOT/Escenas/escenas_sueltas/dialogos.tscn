@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba33ko8dg8vyl"]
+
+[ext_resource type="Script" uid="uid://besqanbqm7mol" path="res://Scripts/dialogos.gd" id="1_j7d67"]
+[ext_resource type="Texture2D" uid="uid://d24tq63q042fk" path="res://Escenarios/WTF In (24x8).png" id="1_uylj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7d67"]
+atlas = ExtResource("1_uylj8")
+region = Rect2(0, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjdf5"]
+atlas = ExtResource("1_uylj8")
+region = Rect2(34, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11o7w"]
+atlas = ExtResource("1_uylj8")
+region = Rect2(68, 0, 34, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ql7tx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7d67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjdf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11o7w")
+}],
+"loop": false,
+"name": &"angry",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_j7d67")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ql7tx")
+animation = &"angry"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
