@@ -22,5 +22,5 @@ class SaveWorker(QThread):
             self.finished.emit(result)
         except Exception as e:
             tb = traceback.format_exc()
-            # Emitimos mensaje de error legible
+            # Emitimos mensaje de error legible.
             self.error.emit(f"{str(e)}\n{tb}")
