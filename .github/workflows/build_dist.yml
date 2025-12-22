@@ -74,14 +74,15 @@ jobs:
     - name: Copy Godot game
       run: |
         xcopy Juego_GODOT\export\* Dist\game\ /E /I /Y
-
+  
     - name: Copy user config if exists
+      shell: powershell
       run: |
-        if exist usuario_local.json (
-          copy usuario_local.json Dist\config\usuario_local.json
-        ) else (
-          echo {} > Dist\config\usuario_local.json
-        )
+        if (Test-Path "usuario_local.json") {
+        Copy-Item "usuario_local.json" "Dist\config\usuario_local.json"
+        } else {
+        '{}' | Out-File "Dist\config\usuario_local.json" -Encoding utf8
+        }
 
     # -------------------------------------------------
     # UPLOAD FINAL PACKAGE
