@@ -1,0 +1,50 @@
+name: Combine Game and Launcher Builds
+
+on:
+  workflow_run:
+    workflows:
+      - Build Godot Windows EXE
+    types:
+      - completed
+
+jobs:
+  package:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Launcher artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "Build Qt Application"
+          name: "Launcher_Videojuego_exe"
+          branch: main
+          workflow_conclusion: success
+          path: package/launcher
+
+      - name: Download Godot artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "Build Godot Windows EXE"
+          name: "windows-build"
+          branch: main
+          workflow_conclusion: success
+          path: package/game
+
+      - name: Combine builds
+        run: |
+          mkdir -p final_package
+          cp package/launcher/*.exe final_package/Launcher_Videojuego.exe
+          cp package/game/*.exe final_package/Juego_GODOT.exe
+          cp package/game/*.pck final_package/Juego_GODOT.pck
+          zip -r final_package/Combined_Build.zip final_package/*
+
+      - name: Upload combined package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Combined_Game_and_Launcher
+          path: final_package/Combined_Build.zip
