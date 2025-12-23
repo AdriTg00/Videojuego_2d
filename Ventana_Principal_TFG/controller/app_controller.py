@@ -17,11 +17,6 @@ import subprocess
 # =========================================================
 
 def get_base_dir():
-    """
-    Devuelve el directorio base de ejecución:
-    - En ejecutable (PyInstaller): carpeta donde está Launcher.exe
-    - En desarrollo: raíz del proyecto
-    """
     if getattr(sys, "frozen", False):
         return os.path.dirname(sys.executable)
     else:
@@ -31,9 +26,6 @@ def get_base_dir():
 
 
 def get_user_file():
-    """
-    Ruta absoluta al archivo de usuario persistente
-    """
     return os.path.join(get_base_dir(), "usuario_local.json")
 
 
@@ -44,7 +36,7 @@ def get_user_file():
 class AppController:
     def __init__(self):
         # -----------------------------
-        # Estado global de la app
+        # Estado global
         # -----------------------------
         self.app_state = {
             "language": "Español",
@@ -52,9 +44,6 @@ class AppController:
         }
 
         self.user_id = None
-        self.nombre_jugador = None
-
-        # Flag para evitar doble lanzamiento
         self.juego_lanzado = False
 
         # -----------------------------
@@ -87,7 +76,7 @@ class AppController:
         self.comprobar_usuario_local()
 
     # =========================================================
-    # ARRANQUE Y USUARIO
+    # USUARIO
     # =========================================================
 
     def comprobar_usuario_local(self):
@@ -99,25 +88,19 @@ class AppController:
                     datos = json.load(f)
 
                 user_id = datos.get("id")
-                print("Usuario ya registrado:", user_id)
-
-                self.user_id = user_id
-                self.nombre_jugador = user_id
-                self.app_state["usuario"] = user_id
-
-                self.mostrar_launcher()
+                if user_id:
+                    self.user_id = user_id
+                    self.app_state["usuario"] = user_id
+                    self.mostrar_launcher()
+                    return
 
             except Exception as e:
                 print("[AppController] Error leyendo usuario_local.json:", e)
-                self.mostrar_introducir_nombre()
-        else:
-            self.mostrar_introducir_nombre()
+
+        self.mostrar_introducir_nombre()
 
     def _on_nombre_validado(self, user_id):
-        print("[AppController] Usuario validado:", user_id)
-
         self.user_id = user_id
-        self.nombre_jugador = user_id
         self.app_state["usuario"] = user_id
 
         try:
@@ -129,26 +112,18 @@ class AppController:
         self.mostrar_launcher()
 
     # =========================================================
-    # MOSTRAR VENTANAS
+    # VENTANAS
     # =========================================================
 
     def mostrar_launcher(self):
-        try:
-            self.introducir_nombre.hide()
-        except Exception:
-            pass
-
-        if not self.launcher.isVisible():
-            self.launcher.show()
-
+        self.introducir_nombre.hide()
+        self.launcher.show()
         self.launcher.raise_()
         self.launcher.activateWindow()
 
     def mostrar_introducir_nombre(self):
         self.introducir_nombre.setWindowModality(Qt.ApplicationModal)
         self.introducir_nombre.show()
-        self.introducir_nombre.raise_()
-        self.introducir_nombre.activateWindow()
 
     def mostrar_partidas_guardadas(self):
         self.carg_partidas.setWindowModality(Qt.ApplicationModal)
@@ -159,7 +134,7 @@ class AppController:
         self.config_window.show()
 
     # =========================================================
-    # ACCIONES DEL LAUNCHER
+    # ACCIONES
     # =========================================================
 
     def abrir_nueva_partida(self):
@@ -175,11 +150,7 @@ class AppController:
         try:
             self.lanzar_juego()
         except Exception as e:
-            QMessageBox.critical(
-                self.launcher,
-                "Error al iniciar el juego",
-                str(e)
-            )
+            QMessageBox.critical(self.launcher, "Error", str(e))
             self.juego_lanzado = False
 
     def lanzar_juego(self):
@@ -194,24 +165,17 @@ class AppController:
             json.dump(
                 {
                     "launched_by": "launcher",
-                    "user": self.app_state.get("usuario")
+                    "user": self.app_state["usuario"]
                 },
                 f,
                 indent=4
             )
 
         juego_exe = os.path.join(game_dir, "Juego.exe")
-
         if not os.path.exists(juego_exe):
-            raise RuntimeError(
-                f"No se encontró el ejecutable del juego en:\n{juego_exe}"
-            )
+            raise RuntimeError(f"No se encontró el juego en:\n{juego_exe}")
 
-        subprocess.Popen(
-            [juego_exe],
-            cwd=game_dir
-        )
+        subprocess.Popen([juego_exe], cwd=game_dir)
 
-        # Cerrar launcher definitivamente
+        #Cerrar SOLO el launcher
         self.launcher.close()
-        sys.exit(0)
