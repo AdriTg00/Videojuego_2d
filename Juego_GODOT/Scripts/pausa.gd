@@ -19,15 +19,17 @@ func _ready():
 	btn_guardar.pressed.connect(_on_guardar_pressed)
 
 	http = HTTPRequest.new()
+	http.process_mode = Node.PROCESS_MODE_ALWAYS  # 🔥 CLAVE
 	add_child(http)
 	http.request_completed.connect(_on_request_completed)
 
-	# 🔒 Esperamos a que el árbol esté listo
-	await get_tree().process_frame
-	player = get_tree().get_first_node_in_group("player")
+	call_deferred("_buscar_player")
 
+
+func _buscar_player():
+	player = get_tree().get_first_node_in_group("player")
 	if player == null:
-		push_warning("PAUSA: No se encontró el nodo 'player' en el grupo 'player'")
+		push_warning("PAUSA: No se encontró el nodo 'player'")
 
 
 func _unhandled_input(event):
@@ -36,12 +38,12 @@ func _unhandled_input(event):
 
 
 func _toggle_pause():
-	var is_paused := not get_tree().paused
-	get_tree().paused = is_paused
-	color_rect.visible = is_paused
-	vbox.visible = is_paused
+	var paused := not get_tree().paused
+	get_tree().paused = paused
+	color_rect.visible = paused
+	vbox.visible = paused
 
-	if is_paused:
+	if paused:
 		btn_reanudar.grab_focus()
 
 
@@ -53,10 +55,16 @@ func _on_guardar_pressed():
 		push_error("No se puede guardar: player no existe")
 		return
 
+	# ⛔ Despausamos temporalmente para permitir HTTP
+	get_tree().paused = false
+
 	if LaunchToken.launched_by_launcher:
 		guardar_remoto()
 	else:
 		guardar_local()
+
+	# ⏸ Volvemos a pausar
+	get_tree().paused = true
 
 
 func guardar_remoto():
@@ -73,20 +81,18 @@ func guardar_remoto():
 		"tipo": "guardado"
 	}
 
-	var json_data := JSON.stringify(data)
 	var headers := ["Content-Type: application/json"]
-
 	var err := http.request(
 		url,
 		headers,
 		HTTPClient.METHOD_POST,
-		json_data
+		JSON.stringify(data)
 	)
 
 	if err != OK:
 		push_error("Error enviando guardado remoto: %s" % err)
 	else:
-		print("Guardado enviado al servidor")
+		print("Guardado remoto enviado")
 
 
 func guardar_local():
@@ -108,8 +114,7 @@ func guardar_local():
 
 
 func _on_request_completed(result, response_code, headers, body):
-	var response = body.get_string_from_utf8()
-	print("Respuesta servidor:", response_code, response)
+	print("Respuesta servidor:", response_code, body.get_string_from_utf8())
 
 	if response_code == 200:
 		print("Partida guardada correctamente")
