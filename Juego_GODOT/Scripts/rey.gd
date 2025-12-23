@@ -249,20 +249,27 @@ func _aplicar_retroceso():
 	velocity.x = direccion * -IMPULSO_RETROCESO
 
 func _ready():
-	if LaunchToken.load_partida.size() > 0:
-		Global.nivel = LaunchToken.load_partida["nivel"]
-		Global.death_count = LaunchToken.load_partida["muertes_nivel"]
-		Global.set_puntuacion(LaunchToken.load_partida["puntuacion"])
-		Global.set_tiempo(LaunchToken.load_partida["tiempo"])
+	if LaunchToken.load_partida.size() > 0 \
+	and LaunchToken.load_partida.has("pos_x") \
+	and LaunchToken.load_partida.has("pos_y"):
+
+		print("Cargando partida desde launcher")
+
+		Global.nivel = LaunchToken.load_partida.get("nivel", 1)
+		Global.death_count = LaunchToken.load_partida.get("muertes_nivel", 0)
+		Global.set_puntuacion(LaunchToken.load_partida.get("puntuacion", 0))
+		Global.set_tiempo(LaunchToken.load_partida.get("tiempo", 0))
 
 		global_position = Vector2(
-			LaunchToken.load_partida["pos_x"],
-			LaunchToken.load_partida["pos_y"]
+		LaunchToken.load_partida.get("pos_x", global_position.x),
+		LaunchToken.load_partida.get("pos_y", global_position.y)
 		)
+	else:
+		print("Nueva partida → valores por defecto")
+
 	musica.play()
-	# Iniciar la secuencia de puerta al comienzo
+
 	en_secuencia_puerta = true
 	anim.play("door_out")
 	await anim.animation_finished
-	# Termina la secuencia → permite movimiento normal
 	en_secuencia_puerta = false
