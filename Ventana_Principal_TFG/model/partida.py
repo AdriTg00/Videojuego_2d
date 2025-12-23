@@ -3,20 +3,22 @@ from datetime import datetime
 class Partida:
     def __init__(
         self,
-        id_partida: str = None,
-        nivel: int = 0,
-        muertes_nivel: int = 0,
-        puntuacion: int = 0,
-        tiempo: int = 0,
-        fecha: datetime = None,
-        tipo: str = "guardado"
+        id_partida=None,
+        nivel=0,
+        muertes_nivel=0,
+        puntuacion=0,
+        tiempo=0,
+        pos_x=0.0,
+        pos_y=0.0,
+        tipo="guardado"
     ):
         self.id_partida = id_partida
         self.nivel = nivel
         self.muertes_nivel = muertes_nivel
         self.puntuacion = puntuacion
         self.tiempo = tiempo
-        self.fecha = fecha
+        self.pos_x = pos_x
+        self.pos_y = pos_y
         self.tipo = tipo
 
     def __repr__(self):
@@ -41,5 +43,7 @@ class Partida:
             puntuacion=data.get("puntuacion", 0),
             tiempo=data.get("tiempo", 0),
             fecha=data.get("fecha"),
+            pos_x=data.get("pos_x", 0.0),
+            pos_y=data.get("pos_y", 0.0),
             tipo=data.get("tipo", "guardado")
         )

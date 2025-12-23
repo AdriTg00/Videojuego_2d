@@ -7,6 +7,8 @@ extends CanvasLayer
 @onready var btn_guardar := $VBoxContainer/guardar
 
 var http: HTTPRequest
+var player = get_tree().get_first_node_in_group("player")
+
 
 
 func _ready():
@@ -50,6 +52,8 @@ func _on_guardar_pressed():
 			"tiempo": Global.get_tiempo_total(),
 			"puntuacion": Global.get_puntuacion_total(),
 			"muertes_nivel": Global.death_count,
+			"pos_x": player.global_position.x,
+			"pos_y": player.global_position.y,
 			"tipo": "guardado"
 		}
 

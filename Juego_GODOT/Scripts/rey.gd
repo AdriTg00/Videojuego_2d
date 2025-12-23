@@ -246,6 +246,16 @@ func _aplicar_retroceso():
 	velocity.x = direccion * -IMPULSO_RETROCESO
 
 func _ready():
+	if LaunchToken.load_partida.size() > 0:
+		Global.nivel = LaunchToken.load_partida["nivel"]
+		Global.death_count = LaunchToken.load_partida["muertes_nivel"]
+		Global.set_puntuacion(LaunchToken.load_partida["puntuacion"])
+		Global.set_tiempo(LaunchToken.load_partida["tiempo"])
+
+		global_position = Vector2(
+			LaunchToken.load_partida["pos_x"],
+			LaunchToken.load_partida["pos_y"]
+		)
 	musica.play()
 	# Iniciar la secuencia de puerta al comienzo
 	en_secuencia_puerta = true
