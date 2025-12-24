@@ -42,9 +42,11 @@ class AppController:
             "language": "Español",
             "usuario": None
         }
-        self._cargar_usuario_local()
+
         self.user_id = None
         self.juego_lanzado = False
+
+        self._cargar_usuario_local()
 
         # -----------------------------
         # Ventanas
@@ -70,6 +72,11 @@ class AppController:
         self.launcher.idioma_cambiado.connect(self.carg_partidas.apply_language)
         self.launcher.idioma_cambiado.connect(self.introducir_nombre.apply_language)
 
+        # CLAVE: conectar selección de partida
+        self.carg_partidas.partida_seleccionada.connect(
+            self._on_partida_seleccionada
+        )
+
         # -----------------------------
         # Arranque
         # -----------------------------
@@ -93,7 +100,6 @@ class AppController:
                     self.app_state["usuario"] = user_id
                     self.mostrar_launcher()
                     return
-
             except Exception as e:
                 print("[AppController] Error leyendo usuario_local.json:", e)
 
@@ -110,6 +116,20 @@ class AppController:
             print("[AppController] Error guardando usuario_local.json:", e)
 
         self.mostrar_launcher()
+
+    def _cargar_usuario_local(self):
+        user_file = get_user_file()
+
+        if os.path.exists(user_file):
+            try:
+                with open(user_file, "r", encoding="utf-8") as f:
+                    datos = json.load(f)
+
+                user_id = datos.get("id")
+                self.app_state["usuario"] = user_id
+                self.user_id = user_id
+            except Exception:
+                pass
 
     # =========================================================
     # VENTANAS
@@ -148,28 +168,45 @@ class AppController:
         self.juego_lanzado = True
 
         try:
-            self.lanzar_juego()
+            self._lanzar_juego()
         except Exception as e:
             QMessageBox.critical(self.launcher, "Error", str(e))
             self.juego_lanzado = False
 
-    def lanzar_juego(self):
+    def _on_partida_seleccionada(self, partida_id):
+        if self.juego_lanzado:
+            return
+
+        self.juego_lanzado = True
+
+        try:
+            self._lanzar_juego(partida_id)
+        except Exception as e:
+            QMessageBox.critical(self.launcher, "Error", str(e))
+            self.juego_lanzado = False
+
+    # =========================================================
+    # LANZAR JUEGO
+    # =========================================================
+
+    def _lanzar_juego(self, partida_id=None):
         base_dir = get_base_dir()
 
         game_dir = os.path.join(base_dir, "game")
         runtime_dir = os.path.join(base_dir, "runtime")
         os.makedirs(runtime_dir, exist_ok=True)
 
+        token_data = {
+            "launched_by": "launcher",
+            "user": self.app_state["usuario"]
+        }
+
+        if partida_id:
+            token_data["load_partida_id"] = partida_id
+
         token_path = os.path.join(runtime_dir, "launch_token.json")
         with open(token_path, "w", encoding="utf-8") as f:
-            json.dump(
-                {
-                    "launched_by": "launcher",
-                    "user": self.app_state["usuario"]
-                },
-                f,
-                indent=4
-            )
+            json.dump(token_data, f, indent=4)
 
         juego_exe = os.path.join(game_dir, "Juego.exe")
         if not os.path.exists(juego_exe):
@@ -177,22 +214,4 @@ class AppController:
 
         subprocess.Popen([juego_exe], cwd=game_dir)
 
-        #Cerrar SOLO el launcher
         self.launcher.close()
-        
-    def _cargar_usuario_local(self):
-        user_file = get_user_file()
-
-        if os.path.exists(user_file):
-            try:
-                with open(user_file, "r", encoding="utf-8") as f:
-                    datos = json.load(f)
-
-                user_id = datos.get("id")
-                self.app_state["usuario"] = user_id
-                self.user_id = user_id
-                self.nombre_jugador = user_id
-
-            except Exception:
-                pass
-
