@@ -1,6 +1,7 @@
 extends Node
 
 var partida := {}
+var fin_ejecutado := false
 
 func aplicar_partida(partida_data: Dictionary):
 	partida = partida_data
@@ -18,15 +19,18 @@ func aplicar_partida(partida_data: Dictionary):
 	Global.score_nivel3 = 0
 
 func fin_de_juego():
-	var datos := {
+	if fin_ejecutado:
+		return
+	fin_ejecutado = true
+
+	var datos = {
 		"jugador_id": LaunchToken.user_name,
 		"tiempo_total": Global.get_tiempo_total(),
 		"puntuacion_total": Global.get_puntuacion_total(),
-		"niveles_superados": 3
+		"niveles_superados": Global.nivel
 	}
 
-	print("FIN DE JUEGO | Enviando estadísticas:", datos)
-
+	print("FIN DE JUEGO | Enviando estadisticas:", datos)
 	_enviar_estadisticas_jugador(datos)
 
 func _enviar_estadisticas_jugador(datos: Dictionary):
