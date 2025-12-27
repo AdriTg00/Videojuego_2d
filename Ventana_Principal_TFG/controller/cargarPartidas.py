@@ -72,41 +72,52 @@ class cargar(QWidget):
 
         for fila, partida in enumerate(partidas):
 
-            # Col 0 → Nivel
-            item_nivel = QTableWidgetItem(str(partida.get("nivel", 1)))
+            # ───────── Col 0 → Jugador ─────────
+            item_jugador = QTableWidgetItem(partida["jugador_id"])
+            item_jugador.setData(Qt.UserRole, partida["id"])  # ID oculto REAL
+            tabla.setItem(fila, 0, item_jugador)
 
-            # 🔑 Guardamos LA PARTIDA ENTERA aquí
-            item_nivel.setData(Qt.UserRole, partida)
-
-            tabla.setItem(fila, 0, item_nivel)
-
-            # Col 1 → Muertes
+            # ───────── Col 1 → Nivel ─────────
             tabla.setItem(
                 fila, 1,
+                QTableWidgetItem(str(partida.get("nivel", 1)))
+            )
+
+            # ───────── Col 2 → Muertes ─────────
+            tabla.setItem(
+                fila, 2,
                 QTableWidgetItem(str(partida.get("muertes_nivel", 0)))
             )
 
-            # Col 2 → Tiempo
+            # ───────── Col 3 → Tiempo ─────────
             tabla.setItem(
-                fila, 2,
+                fila, 3,
                 QTableWidgetItem(
                     self._formatear_tiempo(partida.get("tiempo", 0))
                 )
             )
 
-            # Col 3 → Puntuación
+            # ───────── Col 4 → Puntuación ─────────
             tabla.setItem(
-                fila, 3,
+                fila, 4,
                 QTableWidgetItem(str(partida.get("puntuacion", 0)))
             )
 
-            # Col 4 → Fecha
+            # ───────── Col 5 → Fecha ─────────
             tabla.setItem(
-                fila, 4,
-                QTableWidgetItem(
-                    str(partida.get("fecha", ""))
-                )
+                fila, 5,
+                QTableWidgetItem(str(partida.get("fecha", "")))
             )
+
+            # ───────── Col 6 → ID (opcional visible) ─────────
+            tabla.setItem(
+                fila, 6,
+                QTableWidgetItem(partida["id"])
+            )
+
+        # Ocultamos la columna ID (recomendado)
+        tabla.setColumnHidden(6, True)
+
 
     # -------------------------------------------------
     # Utilidades
