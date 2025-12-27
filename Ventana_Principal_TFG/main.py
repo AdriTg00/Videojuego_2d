@@ -18,7 +18,6 @@ def main():
         }
     """)
     controller = AppController()
-    controller.comprobar_usuario_local()
     sys.exit(app.exec())
 
 if __name__ == "__main__":
