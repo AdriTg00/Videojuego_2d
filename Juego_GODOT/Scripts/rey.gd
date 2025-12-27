@@ -252,18 +252,15 @@ func _aplicar_retroceso():
 
 func _ready():
 	print("REY | Ready en escena:", get_tree().current_scene.name)
-
 	add_to_group("player")
 
-	if GameManager.partida_cargada:
-		print("REY | Aplicando posición de partida cargada")
-
+	if GameManager.partida.size() > 0 and not GameManager.carga_aplicada:
+		print("REY | Spawn desde partida cargada")
 		global_position = Vector2(
 			GameManager.partida.get("pos_x", global_position.x),
 			GameManager.partida.get("pos_y", global_position.y)
 		)
-
-		GameManager.partida_cargada = false
+		GameManager.carga_aplicada = true
 	else:
 		print("REY | Spawn normal del nivel")
 
