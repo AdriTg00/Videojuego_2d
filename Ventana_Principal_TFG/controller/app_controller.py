@@ -182,6 +182,7 @@ class AppController:
     # =========================================================
 
     def _lanzar_juego_con_partida(self, partida: dict):
+        print("🟢 SE LANZA PARTIDA GUARDADA:", partida["id"])
         if self.juego_lanzado:
             return
 
@@ -217,6 +218,7 @@ class AppController:
 
 
     def _lanzar_juego(self):
+        print("🔥 SE LANZA NUEVA PARTIDA")
         base_dir = get_base_dir()
         game_dir = os.path.join(base_dir, "game")
         runtime_dir = os.path.join(base_dir, "runtime")
