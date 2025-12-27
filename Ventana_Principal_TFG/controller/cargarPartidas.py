@@ -73,7 +73,8 @@ class cargar(QWidget):
         for fila, partida in enumerate(partidas):
 
             # ───────── Col 0 → Jugador ─────────
-            item_jugador = QTableWidgetItem(partida["jugador_id"])
+            jugador = self.app_state.get("usuario", "—")
+            item_jugador = QTableWidgetItem(jugador)
             item_jugador.setData(Qt.UserRole, partida["id"])  # ID oculto REAL
             tabla.setItem(fila, 0, item_jugador)
 
