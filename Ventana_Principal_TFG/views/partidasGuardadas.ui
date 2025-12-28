@@ -242,11 +242,11 @@ QScrollBar::sub-line:vertical {
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="EstadisticasJugadorWidget" name="widget" native="true"/>
+      </item>
      </layout>
     </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="EstadisticasJugadorWidget" name="widget" native="true"/>
    </item>
   </layout>
  </widget>

@@ -176,13 +176,13 @@ class Ui_partidaGuardada(object):
 
         self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
 
-
-        self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
-
-        self.widget = EstadisticasJugadorWidget(partidaGuardada)
+        self.widget = EstadisticasJugadorWidget(self.frame_2)
         self.widget.setObjectName(u"widget")
 
-        self.gridLayout_3.addWidget(self.widget, 2, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.widget, 1, 0, 1, 1)
+
+
+        self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
 
 
         self.retranslateUi(partidaGuardada)
