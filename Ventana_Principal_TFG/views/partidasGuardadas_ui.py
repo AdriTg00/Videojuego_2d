@@ -23,14 +23,10 @@ class Ui_partidaGuardada(object):
     def setupUi(self, partidaGuardada):
         if not partidaGuardada.objectName():
             partidaGuardada.setObjectName(u"partidaGuardada")
-        partidaGuardada.resize(575, 359)
+        partidaGuardada.resize(575, 318)
         partidaGuardada.setStyleSheet(u"background-color: #faf0d6;")
         self.gridLayout_3 = QGridLayout(partidaGuardada)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_3.addItem(self.verticalSpacer_2, 4, 0, 1, 1)
-
         self.frame = QFrame(partidaGuardada)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
@@ -174,8 +170,18 @@ class Ui_partidaGuardada(object):
 
         self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
 
+        self.lblEstadisticas = QLabel(self.frame_2)
+        self.lblEstadisticas.setObjectName(u"lblEstadisticas")
+        self.lblEstadisticas.setWordWrap(True)
+
+        self.gridLayout_2.addWidget(self.lblEstadisticas, 1, 0, 1, 1)
+
 
         self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_3.addItem(self.verticalSpacer_2, 4, 0, 1, 1)
 
 
         self.retranslateUi(partidaGuardada)
@@ -200,5 +206,6 @@ class Ui_partidaGuardada(object):
         ___qtablewidgetitem6 = self.tablaGuardados.horizontalHeaderItem(6)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("partidaGuardada", u"ID", None));
         self.partidasGuardadas.setText(QCoreApplication.translate("partidaGuardada", u"Partidas guardadas:", None))
+        self.lblEstadisticas.setText(QCoreApplication.translate("partidaGuardada", u"Ultima partida completada:", None))
     # retranslateUi
 

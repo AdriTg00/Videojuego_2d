@@ -62,6 +62,33 @@ class cargar(QWidget):
         self.ui.partidasGuardadas.setText(
             tr.get("saved_games", "Partidas guardadas")
         )
+    def _cargar_estadisticas_ultima(self):
+        jugador_id = self.app_state.get("usuario")
+
+        if not jugador_id:
+            self.ui.lblEstadisticas.setText("")
+            return
+
+        try:
+            stats = self.jugador_service.obtener_estadisticas_jugador(jugador_id)
+        except Exception as e:
+            print("Error obteniendo estadísticas:", e)
+            self.ui.lblEstadisticas.setText("")
+            return
+
+        if not stats or stats.get("niveles_superados", 0) == 0:
+            self.ui.lblEstadisticas.setText("")
+            return
+
+        texto = (
+            "🏁 Última partida completada\n"
+            f"Jugador: {stats.get('nombre', '-')}\n"
+            f"Tiempo total: {round(stats.get('tiempo_total', 0), 2)} s\n"
+            f"Puntuación total: {stats.get('puntuacion_total', 0)}\n"
+            f"Niveles superados: {stats.get('niveles_superados', 0)}"
+        )
+
+        self.ui.lblEstadisticas.setText(texto)
 
     # -------------------------------------------------
     # Cargar partidas
@@ -120,6 +147,8 @@ class cargar(QWidget):
             )
 
         tabla.setColumnHidden(6, True)
+        self._cargar_estadisticas_ultima()
+
 
 
     # -------------------------------------------------
