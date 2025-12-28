@@ -19,6 +19,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLay
     QHeaderView, QLabel, QSizePolicy, QSpacerItem,
     QTableWidget, QTableWidgetItem, QWidget)
 
+from widgets.estadisticas_jugador_widget import EstadisticasJugadorWidget
+
 class Ui_partidaGuardada(object):
     def setupUi(self, partidaGuardada):
         if not partidaGuardada.objectName():
@@ -27,38 +29,9 @@ class Ui_partidaGuardada(object):
         partidaGuardada.setStyleSheet(u"background-color: #faf0d6;")
         self.gridLayout_3 = QGridLayout(partidaGuardada)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.frame_2 = QFrame(partidaGuardada)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_2 = QGridLayout(self.frame_2)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.partidasGuardadas = QLabel(self.frame_2)
-        self.partidasGuardadas.setObjectName(u"partidasGuardadas")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.partidasGuardadas.sizePolicy().hasHeightForWidth())
-        self.partidasGuardadas.setSizePolicy(sizePolicy)
-        self.partidasGuardadas.setMaximumSize(QSize(500, 300))
-        self.partidasGuardadas.setStyleSheet(u"QLabel {\n"
-"    color: #3C3C3C;\n"
-"    font-size: 30px;\n"
-"    font-weight: bold;\n"
-"}")
-        self.partidasGuardadas.setTextFormat(Qt.TextFormat.AutoText)
-        self.partidasGuardadas.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.partidasGuardadas.setWordWrap(False)
-        self.partidasGuardadas.setOpenExternalLinks(False)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
-
-
-        self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_3.addItem(self.verticalSpacer, 0, 0, 1, 1)
+        self.gridLayout_3.addItem(self.verticalSpacer_2, 4, 0, 1, 1)
 
         self.frame = QFrame(partidaGuardada)
         self.frame.setObjectName(u"frame")
@@ -171,11 +144,45 @@ class Ui_partidaGuardada(object):
         self.gridLayout.addWidget(self.tablaGuardados, 1, 0, 1, 1)
 
 
-        self.gridLayout_3.addWidget(self.frame, 2, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.frame, 3, 0, 1, 1)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_3.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
+        self.gridLayout_3.addItem(self.verticalSpacer, 0, 0, 1, 1)
+
+        self.frame_2 = QFrame(partidaGuardada)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout_2 = QGridLayout(self.frame_2)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.partidasGuardadas = QLabel(self.frame_2)
+        self.partidasGuardadas.setObjectName(u"partidasGuardadas")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.partidasGuardadas.sizePolicy().hasHeightForWidth())
+        self.partidasGuardadas.setSizePolicy(sizePolicy)
+        self.partidasGuardadas.setMaximumSize(QSize(500, 300))
+        self.partidasGuardadas.setStyleSheet(u"QLabel {\n"
+"    color: #3C3C3C;\n"
+"    font-size: 30px;\n"
+"    font-weight: bold;\n"
+"}")
+        self.partidasGuardadas.setTextFormat(Qt.TextFormat.AutoText)
+        self.partidasGuardadas.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.partidasGuardadas.setWordWrap(False)
+        self.partidasGuardadas.setOpenExternalLinks(False)
+
+        self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
+
+
+        self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
+
+        self.widget = EstadisticasJugadorWidget(partidaGuardada)
+        self.widget.setObjectName(u"widget")
+
+        self.gridLayout_3.addWidget(self.widget, 2, 0, 1, 1)
 
 
         self.retranslateUi(partidaGuardada)
@@ -185,7 +192,6 @@ class Ui_partidaGuardada(object):
 
     def retranslateUi(self, partidaGuardada):
         partidaGuardada.setWindowTitle(QCoreApplication.translate("partidaGuardada", u"Form", None))
-        self.partidasGuardadas.setText(QCoreApplication.translate("partidaGuardada", u"Partidas guardadas:", None))
         ___qtablewidgetitem = self.tablaGuardados.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("partidaGuardada", u"Jugador", None));
         ___qtablewidgetitem1 = self.tablaGuardados.horizontalHeaderItem(1)
@@ -200,5 +206,6 @@ class Ui_partidaGuardada(object):
         ___qtablewidgetitem5.setText(QCoreApplication.translate("partidaGuardada", u"Fecha", None));
         ___qtablewidgetitem6 = self.tablaGuardados.horizontalHeaderItem(6)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("partidaGuardada", u"ID", None));
+        self.partidasGuardadas.setText(QCoreApplication.translate("partidaGuardada", u"Partidas guardadas:", None))
     # retranslateUi
 
