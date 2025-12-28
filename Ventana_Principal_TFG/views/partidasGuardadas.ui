@@ -242,22 +242,11 @@ QScrollBar::sub-line:vertical {
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="EstadisticasJugadorWidget" name="widget" native="true"/>
-      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>EstadisticasJugadorWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/estadisticas_jugador_widget</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

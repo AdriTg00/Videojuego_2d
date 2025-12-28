@@ -19,8 +19,6 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLay
     QHeaderView, QLabel, QSizePolicy, QSpacerItem,
     QTableWidget, QTableWidgetItem, QWidget)
 
-from widgets.estadisticas_jugador_widget import EstadisticasJugadorWidget
-
 class Ui_partidaGuardada(object):
     def setupUi(self, partidaGuardada):
         if not partidaGuardada.objectName():
@@ -175,11 +173,6 @@ class Ui_partidaGuardada(object):
         self.partidasGuardadas.setOpenExternalLinks(False)
 
         self.gridLayout_2.addWidget(self.partidasGuardadas, 0, 0, 1, 1)
-
-        self.widget = EstadisticasJugadorWidget(self.frame_2)
-        self.widget.setObjectName(u"widget")
-
-        self.gridLayout_2.addWidget(self.widget, 1, 0, 1, 1)
 
 
         self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)

@@ -11,7 +11,6 @@ from translator import TRANSLATIONS
 
 from services.partida_service import PartidasService
 from services.jugador_service import JugadorService
-from widgets.estadisticas_jugador_widget import EstadisticasJugadorWidget
 
 
 class cargar(QWidget):
@@ -35,7 +34,7 @@ class cargar(QWidget):
         # -----------------------------
         # Widget estadísticas
         # -----------------------------
-        self.estadisticas_widget = EstadisticasJugadorWidget(self)
+
 
         # ⚠️ IMPORTANTE: añadir al layout del UI, no al QWidget raíz
         if self.layout() is not None:
@@ -131,29 +130,6 @@ class cargar(QWidget):
 
         tabla.setColumnHidden(6, True)
 
-        # 🔑 Cargar estadísticas globales
-        self._cargar_estadisticas_ultima()
-
-    # -------------------------------------------------
-    # Estadísticas
-    # -------------------------------------------------
-    def _cargar_estadisticas_ultima(self):
-        jugador_id = self.app_state.get("usuario")
-
-        if not jugador_id:
-            self.estadisticas_widget.limpiar()
-            return
-
-        try:
-            stats = self.jugador_service.obtener_estadisticas_jugador(jugador_id)
-        except Exception:
-            self.estadisticas_widget.limpiar()
-            return
-
-        if stats and stats.get("niveles_superados", 0) > 0:
-            self.estadisticas_widget.cargar_estadisticas(stats)
-        else:
-            self.estadisticas_widget.limpiar()
 
     # -------------------------------------------------
     # Utilidades
