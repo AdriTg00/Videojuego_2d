@@ -4,6 +4,8 @@ extends Node
 # ESTADO GLOBAL DEL JUEGO
 # ===============================
 
+var jugador_id: String = ""   # 🔑 CLAVE
+
 var death_count := 0
 
 var tiempo_total_nivel1 := 0.0
@@ -30,7 +32,7 @@ func get_puntuacion_total() -> int:
 
 
 # ===============================
-# RESET GLOBAL (CLAVE)
+# RESET GLOBAL
 # ===============================
 
 func reset_game():

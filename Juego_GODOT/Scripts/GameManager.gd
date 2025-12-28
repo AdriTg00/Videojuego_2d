@@ -21,6 +21,7 @@ func aplicar_partida(partida_data: Dictionary):
 	Global.score_nivel2 = 0
 	Global.score_nivel3 = 0
 
+
 func fin_de_juego():
 	print("DEBUG | fin_de_juego() llamado")
 
@@ -28,8 +29,13 @@ func fin_de_juego():
 		return
 	fin_ejecutado = true
 
+	# 🔑 VALIDACIÓN CLAVE
+	if Global.jugador_id == "":
+		push_error("FIN DE JUEGO | jugador_id vacío, abortando envío")
+		return
+
 	var datos = {
-		"jugador_id": LaunchToken.user,
+		"jugador_id": Global.jugador_id,
 		"tiempo_total": Global.get_tiempo_total(),
 		"puntuacion_total": Global.get_puntuacion_total(),
 		"niveles_superados": Global.nivel
@@ -37,6 +43,7 @@ func fin_de_juego():
 
 	print("FIN DE JUEGO | Enviando estadisticas:", datos)
 	_enviar_estadisticas_jugador(datos)
+
 
 func _enviar_estadisticas_jugador(datos: Dictionary):
 	var http := HTTPRequest.new()
@@ -53,7 +60,8 @@ func _enviar_estadisticas_jugador(datos: Dictionary):
 		HTTPClient.METHOD_POST,
 		body
 	)
-	
+
+
 func _on_estadisticas_enviadas(result, response_code, headers, body):
 	var text = body.get_string_from_utf8()
 	print("API RESPUESTA | código:", response_code)

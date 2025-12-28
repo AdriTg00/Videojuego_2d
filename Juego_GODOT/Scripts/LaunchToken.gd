@@ -4,7 +4,8 @@ var launched_by_launcher: bool = false
 var user_name: String = "LOCAL_DEV"
 var load_partida: Dictionary = {}
 
-var listo: bool = false   
+var listo: bool = false
+
 
 func _ready():
 	print("LAUNCHTOKEN | _ready()")
@@ -56,6 +57,10 @@ func _leer_launch_token():
 	user_name = data.get("user", "LOCAL_DEV")
 	load_partida = data.get("load_partida", {})
 
+	# 🔑 CLAVE: persistimos el jugador_id en Global
+	Global.jugador_id = user_name
+	print("GLOBAL | jugador_id establecido desde LaunchToken:", Global.jugador_id)
+
 	print("LAUNCHTOKEN | launcher =", launched_by_launcher)
 	print("LAUNCHTOKEN | user =", user_name)
 	print("LAUNCHTOKEN | load_partida =", load_partida)
@@ -69,4 +74,9 @@ func _modo_local():
 	launched_by_launcher = false
 	user_name = "LOCAL_DEV"
 	load_partida = {}
+
+	# 🔑 También en modo local dejamos el jugador_id coherente
+	Global.jugador_id = user_name
+	print("GLOBAL | jugador_id establecido en modo local:", Global.jugador_id)
+
 	listo = true
