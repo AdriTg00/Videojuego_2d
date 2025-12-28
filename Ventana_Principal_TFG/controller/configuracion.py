@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QMessageBox
 from views.configuracion_ui import Ui_configuracion
-from services.configuracionService import ConfiguracionService
+from services.configuracion_service import ConfiguracionService
 from model.configuracion import Configuracion
 from translator import TRANSLATIONS
 

@@ -4,7 +4,7 @@ from workers.save_worker import SaveWorker
 from PySide6.QtWidgets import QWidget, QMessageBox
 from views.introduccionNombre_ui import Ui_introduccionNombre
 from translator import TRANSLATIONS
-from services.jugadorService import JugadorService
+from services.jugador_service import JugadorService
 
 
 class introducirNombre(QWidget):

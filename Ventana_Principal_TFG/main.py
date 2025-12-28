@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from controller.app_controller import AppController
-from services.configuracionService import ConfiguracionDAO
+from services.configuracion_service import ConfiguracionDAO
 
 def main():
     configuracion = ConfiguracionDAO()

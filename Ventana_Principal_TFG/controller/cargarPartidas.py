@@ -9,8 +9,8 @@ from PySide6.QtWidgets import (
 from views.partidasGuardadas_ui import Ui_partidaGuardada
 from translator import TRANSLATIONS
 
-from services.partidaService import PartidasService
-from services.jugadorService import JugadorService
+from services.partida_service import PartidasService
+from services.jugador_service import JugadorService
 from widgets.estadisticas_jugador_widget import EstadisticasJugadorWidget
 
 
