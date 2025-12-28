@@ -34,6 +34,18 @@ func get_puntuacion_total() -> int:
 # ===============================
 # RESET GLOBAL
 # ===============================
+func reset_game_death():
+	print("GLOBAL | Reset completo del juego")
+
+	tiempo_total_nivel1 = 0.0
+	tiempo_total_nivel2 = 0.0
+	tiempo_total_nivel3 = 0.0
+
+	score_nivel1 = 0
+	score_nivel2 = 0
+	score_nivel3 = 0
+
+	nivel = 1
 
 func reset_game():
 	print("GLOBAL | Reset completo del juego")
