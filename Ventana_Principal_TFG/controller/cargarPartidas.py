@@ -5,9 +5,13 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QAbstractItemView
 )
+
 from views.partidasGuardadas_ui import Ui_partidaGuardada
 from translator import TRANSLATIONS
+
 from services.partidaService import PartidasService
+from services.jugadorService import JugadorService
+from widgets.estadisticas_jugador_widget import EstadisticasJugadorWidget
 
 
 class cargar(QWidget):
@@ -21,11 +25,28 @@ class cargar(QWidget):
         self.ui.setupUi(self)
         self.setFixedSize(self.size())
 
-
+        # -----------------------------
+        # Servicios
+        # -----------------------------
         self.partida_service = PartidasService()
+        self.jugador_service = JugadorService()   # 🔑 FALTABA
         self.app_state = app_state
 
-        # Selección por fila
+        # -----------------------------
+        # Widget estadísticas
+        # -----------------------------
+        self.estadisticas_widget = EstadisticasJugadorWidget(self)
+
+        # ⚠️ IMPORTANTE: añadir al layout del UI, no al QWidget raíz
+        if self.layout() is not None:
+            self.layout().addWidget(self.estadisticas_widget)
+        else:
+            # Por si el .ui usa un layout concreto
+            self.ui.verticalLayout.addWidget(self.estadisticas_widget)
+
+        # -----------------------------
+        # Tabla
+        # -----------------------------
         self.ui.tablaGuardados.setSelectionBehavior(
             QAbstractItemView.SelectRows
         )
@@ -33,7 +54,6 @@ class cargar(QWidget):
             QAbstractItemView.SingleSelection
         )
 
-        # Doble click = cargar partida
         self.ui.tablaGuardados.itemDoubleClicked.connect(
             self._on_partida_doble_click
         )
@@ -57,14 +77,14 @@ class cargar(QWidget):
     # Cargar partidas
     # -------------------------------------------------
     def cargar_partidas(self):
-        jugador = self.app_state.get("usuario")
+        jugador_id = self.app_state.get("usuario")
 
-        if not jugador:
+        if not jugador_id:
             QMessageBox.warning(self, "Error", "No hay usuario activo")
             return
 
         try:
-            partidas = self.partida_service.obtener_partidas(jugador)
+            partidas = self.partida_service.obtener_partidas(jugador_id)
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
             return
@@ -75,52 +95,65 @@ class cargar(QWidget):
         for fila, partida in enumerate(partidas):
 
             # ───────── Col 0 → Jugador ─────────
-            jugador = self.app_state.get("usuario", "—")
-            item_jugador = QTableWidgetItem(jugador)
-            item_jugador.setData(Qt.UserRole, partida)  # ID oculto REAL
+            item_jugador = QTableWidgetItem(jugador_id)
+            item_jugador.setData(Qt.UserRole, partida)
             tabla.setItem(fila, 0, item_jugador)
 
             # ───────── Col 1 → Nivel ─────────
-            tabla.setItem(
-                fila, 1,
-                QTableWidgetItem(str(partida.get("nivel", 1)))
+            tabla.setItem(fila, 1, QTableWidgetItem(
+                str(partida.get("nivel", 1)))
             )
 
             # ───────── Col 2 → Muertes ─────────
-            tabla.setItem(
-                fila, 2,
-                QTableWidgetItem(str(partida.get("muertes_nivel", 0)))
+            tabla.setItem(fila, 2, QTableWidgetItem(
+                str(partida.get("muertes_nivel", 0)))
             )
 
             # ───────── Col 3 → Tiempo ─────────
-            tabla.setItem(
-                fila, 3,
-                QTableWidgetItem(
-                    self._formatear_tiempo(partida.get("tiempo", 0))
-                )
+            tabla.setItem(fila, 3, QTableWidgetItem(
+                self._formatear_tiempo(partida.get("tiempo", 0)))
             )
 
             # ───────── Col 4 → Puntuación ─────────
-            tabla.setItem(
-                fila, 4,
-                QTableWidgetItem(str(partida.get("puntuacion", 0)))
+            tabla.setItem(fila, 4, QTableWidgetItem(
+                str(partida.get("puntuacion", 0)))
             )
 
             # ───────── Col 5 → Fecha ─────────
-            tabla.setItem(
-                fila, 5,
-                QTableWidgetItem(str(partida.get("fecha", "")))
+            tabla.setItem(fila, 5, QTableWidgetItem(
+                str(partida.get("fecha", "")))
             )
 
-            # ───────── Col 6 → ID (opcional visible) ─────────
-            tabla.setItem(
-                fila, 6,
-                QTableWidgetItem(partida["id"])
+            # ───────── Col 6 → ID (oculta) ─────────
+            tabla.setItem(fila, 6, QTableWidgetItem(
+                partida.get("id", ""))
             )
 
-        # Ocultamos la columna ID (recomendado)
         tabla.setColumnHidden(6, True)
 
+        # 🔑 Cargar estadísticas globales
+        self._cargar_estadisticas_ultima()
+
+    # -------------------------------------------------
+    # Estadísticas
+    # -------------------------------------------------
+    def _cargar_estadisticas_ultima(self):
+        jugador_id = self.app_state.get("usuario")
+
+        if not jugador_id:
+            self.estadisticas_widget.limpiar()
+            return
+
+        try:
+            stats = self.jugador_service.obtener_estadisticas_jugador(jugador_id)
+        except Exception:
+            self.estadisticas_widget.limpiar()
+            return
+
+        if stats and stats.get("niveles_superados", 0) > 0:
+            self.estadisticas_widget.cargar_estadisticas(stats)
+        else:
+            self.estadisticas_widget.limpiar()
 
     # -------------------------------------------------
     # Utilidades
@@ -139,7 +172,6 @@ class cargar(QWidget):
     def _on_partida_doble_click(self, item):
         fila = item.row()
 
-        # Recuperamos LA PARTIDA COMPLETA
         partida = self.ui.tablaGuardados.item(
             fila, 0
         ).data(Qt.UserRole)
