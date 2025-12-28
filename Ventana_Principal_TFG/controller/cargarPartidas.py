@@ -33,16 +33,7 @@ class cargar(QWidget):
 
         # -----------------------------
         # Widget estadísticas
-        # -----------------------------
-
-
-        # ⚠️ IMPORTANTE: añadir al layout del UI, no al QWidget raíz
-        if self.layout() is not None:
-            self.layout().addWidget(self.estadisticas_widget)
-        else:
-            # Por si el .ui usa un layout concreto
-            self.ui.verticalLayout.addWidget(self.estadisticas_widget)
-
+        # ----------------------------
         # -----------------------------
         # Tabla
         # -----------------------------
