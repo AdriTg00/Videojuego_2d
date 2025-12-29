@@ -130,14 +130,18 @@ func _aplicar_configuracion():
 		linear_to_db(vol_sfx)
 	)
 
-	# -------- Resolución --------
+	# -------- Resolución (DEFERIDA) --------
 	var res_text: String = str(configuracion.get("resolucion", "640x480"))
 	var parts: PackedStringArray = res_text.split("x")
 
 	if parts.size() == 2:
 		var size := Vector2i(parts[0].to_int(), parts[1].to_int())
-		DisplayServer.window_set_size(size)
-		print("CONFIG | Resolución aplicada:", size)
+
+		# ⚠️ SOLO aplicamos resolución si NO es fullscreen
+		if configuracion.get("modo_pantalla", "ventana") != "completa":
+			call_deferred("_aplicar_resolucion", size)
+		else:
+			print("CONFIG | Fullscreen activo → resolución ignorada")
 
 	# -------- Modo pantalla --------
 	if configuracion.get("modo_pantalla", "ventana") == "completa":
@@ -146,3 +150,12 @@ func _aplicar_configuracion():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		print("CONFIG | Modo pantalla: WINDOWED")
+
+
+# ==================================
+# APLICAR RESOLUCIÓN (CORRECTO GODOT 4)
+# ==================================
+func _aplicar_resolucion(size: Vector2i):
+	await get_tree().process_frame
+	DisplayServer.window_set_size(size)
+	print("CONFIG | Resolución aplicada (deferred):", size)
