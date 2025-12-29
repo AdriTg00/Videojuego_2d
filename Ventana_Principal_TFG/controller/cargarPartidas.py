@@ -118,11 +118,11 @@ class cargar(QWidget):
             return
 
         texto = (
-            "🏁 Última partida completada\n"
-            f"Jugador: {stats.get('nombre', '-')}\n"
-            f"Tiempo total: {round(stats.get('tiempo_total', 0), 2)} s\n"
-            f"Puntuación total: {stats.get('puntuacion_total', 0)}\n"
-            f"Niveles superados: {niveles}"
+            "🏁 ÚLTIMA PARTIDA COMPLETADA\n\n"
+                f"👤 Jugador: {stats.get('nombre', '-')}\n"
+                f"⏱ Tiempo total: {round(stats.get('tiempo_total', 0), 2)} s\n"
+                f"⭐ Puntuación total: {stats.get('puntuacion_total', 0)}\n"
+                f"🏆 Niveles superados: {stats.get('niveles_superados', 0)}"
         )
 
         self.log.info("Pintando estadísticas en lblEstadisticas")
