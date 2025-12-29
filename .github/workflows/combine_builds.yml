@@ -19,7 +19,7 @@ jobs:
 
           RUN_ID=$(gh run list \
             --workflow "Build Qt Application" \
-            --branch main \
+            --branch  "$GITHUB_REF_NAME" \
             --status success \
             --limit 1 \
             --json databaseId \
