@@ -23,7 +23,7 @@ class Ui_partidaGuardada(object):
     def setupUi(self, partidaGuardada):
         if not partidaGuardada.objectName():
             partidaGuardada.setObjectName(u"partidaGuardada")
-        partidaGuardada.resize(575, 318)
+        partidaGuardada.resize(575, 455)
         partidaGuardada.setStyleSheet(u"background-color: #faf0d6;")
         self.gridLayout_3 = QGridLayout(partidaGuardada)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
