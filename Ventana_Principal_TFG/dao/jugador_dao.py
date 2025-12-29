@@ -28,7 +28,7 @@ class JugadorDAO:
     def obtener_estadisticas(self, jugador_id: str):
         resp = self.session.get(
             f"{BASE_URL}/jugadores/{jugador_id}",
-            timeout=self.timeout
+            timeout=self.default_timeout
         )
 
         if resp.status_code != 200:
