@@ -17,6 +17,7 @@ var listo: bool = false
 func _ready():
 	print("LAUNCHTOKEN | _ready()")
 	call_deferred("_leer_launch_token")
+	_aplicar_configuracion()
 
 
 # ==================================
