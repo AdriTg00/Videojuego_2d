@@ -77,18 +77,9 @@ class AppController:
         self.nav.mostrar_launcher()
 
     def _nueva_partida(self):
-        if not self.session.state["usuario"]:
-            self.nav.mostrar_intro()
-            return
-        try:
-            self.game.lanzar_nueva()
-            self.launcher.close()
-        except Exception as e:
-            QMessageBox.critical(self.launcher, "Error", str(e))
+        self.game.lanzar_nueva()
+        self.launcher.close()
 
-    def _cargar_partida(self, partida: dict):
-        try:
-            self.game.lanzar_con_partida(partida)
-            self.launcher.close()
-        except Exception as e:
-            QMessageBox.critical(self.launcher, "Error", str(e))
+    def _cargar_partida(self, partida):
+        self.game.lanzar_con_partida(partida)
+        self.launcher.close()
