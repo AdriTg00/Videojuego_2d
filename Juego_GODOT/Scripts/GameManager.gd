@@ -9,6 +9,7 @@ var partida_cargada := false
 func aplicar_partida(partida_data: Dictionary):
 	partida = partida_data
 	carga_aplicada = false
+	fin_ejecutado = false
 
 	Global.nivel = int(partida.get("nivel", 1))
 	Global.death_count = int(partida.get("muertes_nivel", 0))
