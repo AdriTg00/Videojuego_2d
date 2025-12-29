@@ -208,7 +208,7 @@ class AppController:
 
     def _lanzar_juego_con_partida(self, partida: dict):
         self.juego_lanzado = True
-        log_to_file(f"🟢 LANZANDO PARTIDA GUARDADA: {partida['id']}")
+        log_to_file(f"🟢 LANZANDO PARTIDA GUARDADA: {partida.get('id')}")
 
         base_dir = get_base_dir()
         game_dir = os.path.join(base_dir, "game")
@@ -216,9 +216,21 @@ class AppController:
         os.makedirs(runtime_dir, exist_ok=True)
 
         token_path = os.path.join(runtime_dir, "launch_token.json")
+        log_to_file(f"📍 RUTA TOKEN (CARGA): {token_path}")
 
         # 🔑 CARGAR CONFIGURACIÓN
         config = self.configuracion_service.cargar_configuracion()
+
+        if not config:
+            log_to_file("⚠ Configuración NULL, usando valores por defecto")
+        else:
+            log_to_file(
+                "⚙ Configuración cargada: "
+                f"musica={config.volumen_musica}, "
+                f"sfx={config.volumen_sfx}, "
+                f"res={config.resolucion}, "
+                f"modo={config.modo_pantalla}"
+            )
 
         token_data = {
             "launched_by": "launcher",
@@ -235,11 +247,15 @@ class AppController:
         with open(token_path, "w", encoding="utf-8") as f:
             json.dump(token_data, f, indent=4)
 
-        log_to_file(f"📄 TOKEN ESCRITO (CARGA): {token_data}")
+        log_to_file("📄 TOKEN FINAL (CARGA):")
+        log_to_file(json.dumps(token_data, indent=2))
 
         juego_exe = os.path.join(game_dir, "Juego.exe")
+        log_to_file(f"🎮 Ejecutando juego: {juego_exe}")
+
         subprocess.Popen([juego_exe], cwd=game_dir)
         self.launcher.close()
+
 
 
     def _lanzar_juego_nuevo(self):
@@ -251,9 +267,21 @@ class AppController:
         os.makedirs(runtime_dir, exist_ok=True)
 
         token_path = os.path.join(runtime_dir, "launch_token.json")
+        log_to_file(f"📍 RUTA TOKEN (NUEVA): {token_path}")
 
         # 🔑 CARGAR CONFIGURACIÓN
         config = self.configuracion_service.cargar_configuracion()
+
+        if not config:
+            log_to_file("⚠ Configuración NULL, usando valores por defecto")
+        else:
+            log_to_file(
+                "⚙ Configuración cargada: "
+                f"musica={config.volumen_musica}, "
+                f"sfx={config.volumen_sfx}, "
+                f"res={config.resolucion}, "
+                f"modo={config.modo_pantalla}"
+            )
 
         token_data = {
             "launched_by": "launcher",
@@ -269,9 +297,13 @@ class AppController:
         with open(token_path, "w", encoding="utf-8") as f:
             json.dump(token_data, f, indent=4)
 
-        log_to_file(f"📄 TOKEN ESCRITO (NUEVA): {token_data}")
+        log_to_file("📄 TOKEN FINAL (NUEVA):")
+        log_to_file(json.dumps(token_data, indent=2))
 
         juego_exe = os.path.join(game_dir, "Juego.exe")
+        log_to_file(f"🎮 Ejecutando juego: {juego_exe}")
+
         subprocess.Popen([juego_exe], cwd=game_dir)
         self.launcher.close()
+
 
