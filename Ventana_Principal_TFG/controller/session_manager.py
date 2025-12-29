@@ -1,7 +1,7 @@
 import os
 import json
 import sys
-
+from utils.paths import get_base_dir
 
 class SessionManager:
     def __init__(self):
@@ -11,20 +11,14 @@ class SessionManager:
         }
         self._cargar_usuario_local()
 
-    # -----------------------------
+
     # Paths
-    # -----------------------------
-    def _base_dir(self):
-        if getattr(sys, "frozen", False):
-            return os.path.dirname(sys.executable)
-        return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
     def _user_file(self):
-        return os.path.join(self._base_dir(), "usuario_local.json")
+        return os.path.join(get_base_dir(), "usuario_local.json")
 
-    # -----------------------------
+   
     # Usuario local
-    # -----------------------------
     def _cargar_usuario_local(self):
         if not os.path.exists(self._user_file()):
             return
