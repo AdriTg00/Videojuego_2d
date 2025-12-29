@@ -9,6 +9,7 @@ from .introduccionNombre import introducirNombre
 from .session_manager import SessionManager
 from .controlador_navegacion import NavigationController
 from .game_launcher import GameLauncher
+from PySide6.QtWidgets import QApplication
 
 
 class AppController:
@@ -48,16 +49,14 @@ class AppController:
         self._decidir_inicio()
 
     def _conectar_senales(self):
-        self.intro.nombre_validado.connect(
-            self._on_nombre_validado,
-            type=Qt.QueuedConnection
-        )
+        self.intro.nombre_validado.connect(self._on_nombre_validado, type=Qt.QueuedConnection)
 
         self.launcher.abrir_config_signal.connect(self.nav.mostrar_config)
         self.launcher.abrir_cargar_signal.connect(self.nav.mostrar_partidas)
         self.launcher.abrir_nueva_signal.connect(self._nueva_partida)
 
         self.cargar.partida_seleccionada.connect(self._cargar_partida)
+        self.launcher.salir_signal.connect(self._salir_app)
 
         self.launcher.idioma_cambiado.connect(self.config.apply_language)
         self.launcher.idioma_cambiado.connect(self.cargar.apply_language)
@@ -83,3 +82,6 @@ class AppController:
     def _cargar_partida(self, partida):
         self.game.lanzar_con_partida(partida)
         self.launcher.close()
+    
+    def _salir_app(self):
+        QApplication.quit()

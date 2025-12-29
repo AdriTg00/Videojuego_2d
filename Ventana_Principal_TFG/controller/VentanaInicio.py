@@ -10,6 +10,7 @@ class launcher(QMainWindow):
     abrir_config_signal = Signal()
     abrir_cargar_signal = Signal()
     abrir_nueva_signal = Signal()
+    salir_signal = Signal() 
     idioma_cambiado = Signal(str)
 
     def __init__(self, app_state, parent=None):
@@ -22,6 +23,9 @@ class launcher(QMainWindow):
         
     
         self.ui.nuevaPartida.clicked.connect(self.nueva_partida)
+        self.ui.salir.clicked.connect(self.salir)
+
+        
         self.ui.cargarDatos.clicked.connect(self.cargar_datos)
         current_lang = self.app_state.get("language", "Español")
         self.ui.comboIdioma.setCurrentText(current_lang)
@@ -60,4 +64,7 @@ class launcher(QMainWindow):
         self.ui.opciones.setText(tr["options"])
         self.ui.salir.setText(tr["exit"])
         self.ui.idioma.setText(tr["language_label"])
+    def salir(self):
+        self.salir_signal.emit()
+
       
