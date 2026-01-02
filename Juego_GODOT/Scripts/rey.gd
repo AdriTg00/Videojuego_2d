@@ -78,7 +78,7 @@ func _physics_process(delta):
 
 	
 	# --- Ataque ---
-	if Input.is_action_just_pressed("ui_accept") and puede_atacar and not muerto:
+	if Input.is_action_just_pressed("attack") and puede_atacar and not muerto:
 		_atacar()
 	# --- Animaciones automáticas ---
 	_actualizar_animacion()
