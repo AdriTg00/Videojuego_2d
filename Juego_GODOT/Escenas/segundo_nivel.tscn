@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://g6qlkxdk0emo"]
+[gd_scene load_steps=77 format=3 uid="uid://g6qlkxdk0emo"]
 
 [ext_resource type="Script" uid="uid://hrcnw722cc3u" path="res://Scripts/canvas_layer_nivel2.gd" id="1_g6j3w"]
 [ext_resource type="Script" uid="uid://dxt2nh8x8vbbl" path="res://Scripts/paso_nivel_3.gd" id="1_tmjps"]
@@ -7,9 +7,14 @@
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="4_6dj0q"]
 [ext_resource type="PackedScene" uid="uid://bko4527xfx4lu" path="res://Escenas/escenas_sueltas/escenario2.tscn" id="5_6dj0q"]
 [ext_resource type="PackedScene" uid="uid://bv2mgkpwgojls" path="res://Escenas/escenas_sueltas/rey.tscn" id="5_74atf"]
+[ext_resource type="Script" uid="uid://drx54o3xg81xp" path="res://Escenas/mobile_controls.gd" id="6_4gcoy"]
+[ext_resource type="Texture2D" uid="uid://ctrrxkok0ceg7" path="res://Escenarios/chevron-derecho.png" id="6_fjud7"]
 [ext_resource type="PackedScene" uid="uid://1eymk2mx5bv8" path="res://Escenas/escenas_sueltas/puerta.tscn" id="7_0scks"]
+[ext_resource type="Texture2D" uid="uid://b84njeije2xye" path="res://Escenarios/hombre-saltando.png" id="7_4gcoy"]
 [ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/escenas_sueltas/pausa.tscn" id="7_ep8kk"]
+[ext_resource type="Texture2D" uid="uid://bvmluyu2mark3" path="res://Escenarios/hombre-atacando.png" id="8_wld8t"]
 [ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/escenas_sueltas/moneda.tscn" id="9_0scks"]
+[ext_resource type="Texture2D" uid="uid://be2ghsjc3uoor" path="res://Escenarios/boton-de-pausa-de-video.png" id="9_dxxu3"]
 [ext_resource type="PackedScene" uid="uid://dm2ovaj0lxot8" path="res://Escenas/escenas_sueltas/enemigo.tscn" id="10_qvf3y"]
 [ext_resource type="Script" uid="uid://50cdm4gmvq8u" path="res://Scripts/enemigo2_0.gd" id="11_hcc8u"]
 [ext_resource type="PackedScene" uid="uid://dg1cka305d3cl" path="res://Escenas/escenas_sueltas/enemigo2_0.tscn" id="12_hcc8u"]
@@ -437,6 +442,40 @@ script = ExtResource("1_tmjps")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("1_g6j3w")
+
+[node name="mobileControls" type="CanvasLayer" parent="CanvasLayer"]
+script = ExtResource("6_4gcoy")
+
+[node name="btnLeft" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(111, 532.00006)
+rotation = -3.1415927
+scale = Vector2(0.21780393, -0.2237499)
+texture_normal = ExtResource("6_fjud7")
+action = "move_left"
+
+[node name="btnRight" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(234.00002, 532)
+scale = Vector2(0.218, 0.218)
+texture_normal = ExtResource("6_fjud7")
+action = "move_right"
+
+[node name="btnUp" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(899, 462)
+scale = Vector2(0.15804441, 0.15804441)
+texture_normal = ExtResource("7_4gcoy")
+action = "jump"
+
+[node name="btnAttack" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(1041, 547)
+scale = Vector2(0.158, 0.158)
+texture_normal = ExtResource("8_wld8t")
+action = "attack"
+
+[node name="btnPausar" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(1049.0001, 8)
+scale = Vector2(0.181, 0.185)
+texture_normal = ExtResource("9_dxxu3")
+action = "pausa"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
 position = Vector2(26, 48.153145)

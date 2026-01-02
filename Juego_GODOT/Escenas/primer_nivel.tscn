@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://b0vjtjiqkhxpo"]
+[gd_scene load_steps=74 format=3 uid="uid://b0vjtjiqkhxpo"]
 
 [ext_resource type="PackedScene" uid="uid://bojdsefgg5ctc" path="res://Escenas/escenas_sueltas/escenario1.tscn" id="1_6nong"]
 [ext_resource type="Script" uid="uid://d4caokhdyxue3" path="res://Scripts/paso_nivel_2.gd" id="1_11vps"]
@@ -10,9 +10,14 @@
 [ext_resource type="FontFile" uid="uid://c1jfsmqgedydq" path="res://recursos/upheavtt.ttf" id="7_v3ylf"]
 [ext_resource type="PackedScene" uid="uid://d2k3o2gap5rtp" path="res://Escenas/escenas_sueltas/moneda.tscn" id="8_1viw4"]
 [ext_resource type="PackedScene" uid="uid://dm2ovaj0lxot8" path="res://Escenas/escenas_sueltas/enemigo.tscn" id="9_sosnl"]
+[ext_resource type="Script" uid="uid://drx54o3xg81xp" path="res://Escenas/mobile_controls.gd" id="10_3jieh"]
+[ext_resource type="Texture2D" uid="uid://ctrrxkok0ceg7" path="res://Escenarios/chevron-derecho.png" id="10_dhi02"]
 [ext_resource type="PackedScene" uid="uid://cqwbwnihpcogn" path="res://Escenas/escenas_sueltas/pausa.tscn" id="10_h3qja"]
+[ext_resource type="Texture2D" uid="uid://b84njeije2xye" path="res://Escenarios/hombre-saltando.png" id="11_3jieh"]
 [ext_resource type="PackedScene" uid="uid://bn8useixraffm" path="res://Escenas/escenas_sueltas/puerta_salida.tscn" id="11_h146j"]
+[ext_resource type="Texture2D" uid="uid://bvmluyu2mark3" path="res://Escenarios/hombre-atacando.png" id="12_v11b8"]
 [ext_resource type="PackedScene" uid="uid://de8ylx7cosmsd" path="res://Escenas/escenas_sueltas/canvas_layer_dead.tscn" id="13_mk6c5"]
+[ext_resource type="Texture2D" uid="uid://be2ghsjc3uoor" path="res://Escenarios/boton-de-pausa-de-video.png" id="13_okwsc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ln3"]
 atlas = ExtResource("5_gjw6x")
@@ -453,41 +458,50 @@ position_smoothing_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_h146j")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="HUDContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
 position = Vector2(26, 48.153145)
 scale = Vector2(3.7361634, 3.7361634)
 sprite_frames = SubResource("SpriteFrames_glomq")
 animation = &"hit"
 offset = Vector2(80, 0)
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
 position = Vector2(26, 48.153145)
 scale = Vector2(3.7361634, 3.7361634)
 sprite_frames = SubResource("SpriteFrames_pvcgu")
 animation = &"hit"
 offset = Vector2(60, 0)
 
-[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
 position = Vector2(26, 48.153145)
 scale = Vector2(3.7361634, 3.7361634)
 sprite_frames = SubResource("SpriteFrames_wp068")
 animation = &"hit"
 offset = Vector2(40, 0)
 
-[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
 position = Vector2(26, 48.153145)
 scale = Vector2(3.7361634, 3.7361634)
 sprite_frames = SubResource("SpriteFrames_deitq")
 animation = &"hit"
 offset = Vector2(20, 0)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
 position = Vector2(26, 48.153145)
 scale = Vector2(3.7361634, 3.7361634)
 sprite_frames = SubResource("SpriteFrames_nobe6")
 animation = &"hit"
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/HUDContainer"]
+layout_mode = 0
 offset_left = 736.0
 offset_top = 17.0
 offset_right = 776.0
@@ -497,17 +511,19 @@ theme_override_font_sizes/font_size = 70
 text = "
 "
 
-[node name="timerLabel" type="Label" parent="CanvasLayer"]
+[node name="timerLabel" type="Label" parent="CanvasLayer/HUDContainer"]
+layout_mode = 0
 offset_left = 22.999998
 offset_top = 87.0
-offset_right = 111.0
-offset_bottom = 136.0
+offset_right = 300.0
+offset_bottom = 182.0
 theme_override_fonts/font = ExtResource("7_v3ylf")
 theme_override_font_sizes/font_size = 50
 text = "Time: 00:00
 "
 
-[node name="level_section" type="Label" parent="CanvasLayer"]
+[node name="level_section" type="Label" parent="CanvasLayer/HUDContainer"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 141.0
 offset_right = 172.0
@@ -516,13 +532,48 @@ theme_override_fonts/font = ExtResource("7_v3ylf")
 theme_override_font_sizes/font_size = 40
 text = "LEVEL 1"
 
-[node name="death" type="Label" parent="CanvasLayer"]
+[node name="death" type="Label" parent="CanvasLayer/HUDContainer"]
+layout_mode = 0
 offset_left = 737.0
 offset_top = 74.0
 offset_right = 809.0
-offset_bottom = 110.0
+offset_bottom = 128.0
 theme_override_fonts/font = ExtResource("7_v3ylf")
 theme_override_font_sizes/font_size = 60
+
+[node name="mobileControls" type="CanvasLayer" parent="CanvasLayer"]
+script = ExtResource("10_3jieh")
+
+[node name="btnLeft" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(111, 532.00006)
+rotation = -3.1415927
+scale = Vector2(0.21780393, -0.2237499)
+texture_normal = ExtResource("10_dhi02")
+action = "move_left"
+
+[node name="btnRight" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(234.00002, 532)
+scale = Vector2(0.218, 0.218)
+texture_normal = ExtResource("10_dhi02")
+action = "move_right"
+
+[node name="btnUp" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(899, 462)
+scale = Vector2(0.15804441, 0.15804441)
+texture_normal = ExtResource("11_3jieh")
+action = "jump"
+
+[node name="btnAttack" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(1041, 547)
+scale = Vector2(0.158, 0.158)
+texture_normal = ExtResource("12_v11b8")
+action = "attack"
+
+[node name="btnPausar" type="TouchScreenButton" parent="CanvasLayer/mobileControls"]
+position = Vector2(1050, 12)
+scale = Vector2(0.18099284, 0.18548217)
+texture_normal = ExtResource("13_okwsc")
+action = "pausa"
 
 [node name="monedas" type="Node" parent="."]
 
