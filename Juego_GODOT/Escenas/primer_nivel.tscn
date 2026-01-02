@@ -458,89 +458,6 @@ position_smoothing_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_h146j")
 
-[node name="HUDContainer" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
-position = Vector2(26, 48.153145)
-scale = Vector2(3.7361634, 3.7361634)
-sprite_frames = SubResource("SpriteFrames_glomq")
-animation = &"hit"
-offset = Vector2(80, 0)
-
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
-position = Vector2(26, 48.153145)
-scale = Vector2(3.7361634, 3.7361634)
-sprite_frames = SubResource("SpriteFrames_pvcgu")
-animation = &"hit"
-offset = Vector2(60, 0)
-
-[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
-position = Vector2(26, 48.153145)
-scale = Vector2(3.7361634, 3.7361634)
-sprite_frames = SubResource("SpriteFrames_wp068")
-animation = &"hit"
-offset = Vector2(40, 0)
-
-[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
-position = Vector2(26, 48.153145)
-scale = Vector2(3.7361634, 3.7361634)
-sprite_frames = SubResource("SpriteFrames_deitq")
-animation = &"hit"
-offset = Vector2(20, 0)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/HUDContainer"]
-position = Vector2(26, 48.153145)
-scale = Vector2(3.7361634, 3.7361634)
-sprite_frames = SubResource("SpriteFrames_nobe6")
-animation = &"hit"
-
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/HUDContainer"]
-layout_mode = 0
-offset_left = 736.0
-offset_top = 17.0
-offset_right = 776.0
-offset_bottom = 236.0
-theme_override_fonts/font = ExtResource("7_v3ylf")
-theme_override_font_sizes/font_size = 70
-text = "
-"
-
-[node name="timerLabel" type="Label" parent="CanvasLayer/HUDContainer"]
-layout_mode = 0
-offset_left = 22.999998
-offset_top = 87.0
-offset_right = 300.0
-offset_bottom = 182.0
-theme_override_fonts/font = ExtResource("7_v3ylf")
-theme_override_font_sizes/font_size = 50
-text = "Time: 00:00
-"
-
-[node name="level_section" type="Label" parent="CanvasLayer/HUDContainer"]
-layout_mode = 0
-offset_left = 28.0
-offset_top = 141.0
-offset_right = 172.0
-offset_bottom = 177.0
-theme_override_fonts/font = ExtResource("7_v3ylf")
-theme_override_font_sizes/font_size = 40
-text = "LEVEL 1"
-
-[node name="death" type="Label" parent="CanvasLayer/HUDContainer"]
-layout_mode = 0
-offset_left = 737.0
-offset_top = 74.0
-offset_right = 809.0
-offset_bottom = 128.0
-theme_override_fonts/font = ExtResource("7_v3ylf")
-theme_override_font_sizes/font_size = 60
-
 [node name="mobileControls" type="CanvasLayer" parent="CanvasLayer"]
 script = ExtResource("10_3jieh")
 
@@ -574,6 +491,77 @@ position = Vector2(1050, 12)
 scale = Vector2(0.18099284, 0.18548217)
 texture_normal = ExtResource("13_okwsc")
 action = "pausa"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(26, 48.153145)
+scale = Vector2(3.7361634, 3.7361634)
+sprite_frames = SubResource("SpriteFrames_glomq")
+animation = &"hit"
+offset = Vector2(80, 0)
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(26, 48.153145)
+scale = Vector2(3.7361634, 3.7361634)
+sprite_frames = SubResource("SpriteFrames_pvcgu")
+animation = &"hit"
+offset = Vector2(60, 0)
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(26, 48.153145)
+scale = Vector2(3.7361634, 3.7361634)
+sprite_frames = SubResource("SpriteFrames_wp068")
+animation = &"hit"
+offset = Vector2(40, 0)
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(26, 48.153145)
+scale = Vector2(3.7361634, 3.7361634)
+sprite_frames = SubResource("SpriteFrames_deitq")
+animation = &"hit"
+offset = Vector2(20, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(26, 48.153145)
+scale = Vector2(3.7361634, 3.7361634)
+sprite_frames = SubResource("SpriteFrames_nobe6")
+animation = &"hit"
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 736.0
+offset_top = 17.0
+offset_right = 776.0
+offset_bottom = 236.0
+theme_override_fonts/font = ExtResource("7_v3ylf")
+theme_override_font_sizes/font_size = 70
+text = "
+"
+
+[node name="timerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 22.999998
+offset_top = 87.0
+offset_right = 300.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("7_v3ylf")
+theme_override_font_sizes/font_size = 50
+text = "Time: 00:00
+"
+
+[node name="level_section" type="Label" parent="CanvasLayer"]
+offset_left = 28.0
+offset_top = 141.0
+offset_right = 172.0
+offset_bottom = 177.0
+theme_override_fonts/font = ExtResource("7_v3ylf")
+theme_override_font_sizes/font_size = 40
+text = "LEVEL 1"
+
+[node name="death" type="Label" parent="CanvasLayer"]
+offset_left = 737.0
+offset_top = 74.0
+offset_right = 809.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("7_v3ylf")
+theme_override_font_sizes/font_size = 60
 
 [node name="monedas" type="Node" parent="."]
 

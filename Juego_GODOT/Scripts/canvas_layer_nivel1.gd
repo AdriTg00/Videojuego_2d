@@ -1,13 +1,13 @@
 extends CanvasLayer
 
 # --- CONFIGURACIÓN DEL HUD ---
-@onready var score_label = $HUDContainer/ScoreLabel
-@onready var timerLabel = $HUDContainer/timerLabel
-@onready var level_section = $HUDContainer/level_section
+@onready var score_label = $ScoreLabel
+@onready var timerLabel = $timerLabel
+@onready var level_section = $level_section
 @export var hud_offset := Vector2(-500, -250)  # Desplazamiento del HUD en pantalla
 @export var suavizado := true
 @export var velocidad_suavizado := 5.0
-@onready var death_label = $HUDContainer/death
+@onready var death_label = $death
 # --- SISTEMA DE VIDA ---
 @export var max_vida := 5
 var vida_actual := max_vida
